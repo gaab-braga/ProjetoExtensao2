@@ -1,5 +1,6 @@
 # GUIA DE TAREFAS POR EQUIPE
 ## Quem faz o quê, passo a passo — Projeto Acessibilidade Digital
+### v3 — Equipe de 4 pessoas · Foco nas Perguntas e Organização do Resultado
 
 > **Leia o [BACKLOG_PROJETO.md](BACKLOG_PROJETO.md) antes de começar.**  
 > Este documento traduz o backlog em tarefas concretas para cada pessoa.  
@@ -7,165 +8,74 @@
 
 ---
 
-## VISÃO GERAL DO PROJETO (em linguagem simples)
+## VISÃO GERAL DO PROJETO
 
 **O que estamos fazendo?**
-Estamos analisando dados reais de escolas brasileiras para descobrir se a "digitalização" das escolas (uso de plataformas como Google Classroom, Zoom etc.) veio acompanhada de cuidados com alunos com deficiência (tecnologias assistivas, salas adaptadas etc.) — ou se essas pessoas foram deixadas de fora.
+Analisando dados reais de escolas brasileiras para descobrir se a digitalização (uso de plataformas como Google Classroom, Zoom etc.) veio acompanhada de cuidados com alunos com deficiência (tecnologias assistivas, salas adaptadas etc.) — ou se essas pessoas foram deixadas de fora.
 
 **De onde vêm os dados?**
-De uma pesquisa oficial do governo chamada **TIC Educação 2024**, feita pelo Cetic.br. Ela entrevistou diretores/gestores de escolas do Brasil inteiro.
+Das **Tabelas de Indicadores** oficiais da pesquisa **TIC Educação 2024**, publicadas pelo Cetic.br. São dois arquivos Excel com 69 abas cada: um com **percentuais** e outro com **contagens absolutas**. Os dados já vêm prontos e ponderados — NÃO são microdados.
 
 **O que queremos provar?**
-Que muitas escolas adotaram plataformas digitais, mas NÃO investiram em acessibilidade na mesma proporção. Isso é uma violação da Lei Brasileira de Inclusão.
+Que embora 73,8% das escolas usem plataformas digitais, os recursos de acessibilidade (hardware adaptado, software assistivo, aulas, materiais) atingem no máximo 34%. E que esse gap é muito pior em escolas rurais, pequenas e do Norte/Nordeste.
 
-**O que cada equipe faz (resumo)?**
+**⚠️ O QUE NÃO PODEMOS FAZER COM ESSES DADOS:**
+- Cruzar duas variáveis de abas diferentes
+- Machine Learning (regressão, árvore de decisão)
+- Filtrar subgrupos compostos
+
+**Equipe e papéis:**
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    GABRIEL (PO)                          │
-│  Define o que fazer · Valida resultados · Integra tudo  │
-└──────────────────────────┬──────────────────────────────┘
-                           │
-          ┌────────────────┼────────────────┐
-          ▼                ▼                ▼
-  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-  │ SECRETARIADO │ │ EQ. DE DADOS │ │   EQ. ADS    │
-  │  (2 pessoas) │ │  (2 pessoas) │ │  (1 pessoa)  │
-  │              │ │              │ │              │
-  │ Pesquisam    │ │ Limpam o CSV │ │ Cria modelo  │
-  │ as LEIS      │ │ Geram os     │ │ preditivo    │
-  │ Escrevem o   │ │ GRÁFICOS e   │ │ (regressão)  │
-  │ TEXTO final  │ │ TABELAS      │ │              │
-  └──────────────┘ └──────────────┘ └──────────────┘
-       POR QUÊ?        O QUÊ?          E SE...?
+┌─────────────────────────────────────────────────┐
+│                 GABRIEL (PO)                      │
+│  Define escopo · Valida resultados · Redige o    │
+│  artigo final · Integra referências legais       │
+└──────────────────────┬──────────────────────────┘
+                       │
+          ┌────────────┴────────────┐
+          ▼                         ▼
+  ┌──────────────────┐      ┌──────────────┐
+  │ EQUIPE DE DADOS  │      │   EQ. ADS    │
+  │   (2 pessoas)    │      │  (1 pessoa)  │
+  │                  │      │              │
+  │ Extraem dados    │      │ Dashboard    │
+  │ dos XLSX         │      │ Power BI     │
+  │ Geram GRÁFICOS   │      │ Visualizações│
+  │ e TABELAS        │      │ interativas  │
+  │ para cada        │      │              │
+  │ PERGUNTA         │      │              │
+  └──────────────────┘      └──────────────┘
+     RESPONDEM                 VISUALIZAM
+   AS PERGUNTAS              E APRESENTAM
 ```
 
 ---
 
-# EQUIPE DE SECRETARIADO (2 pessoas)
+## GABRIEL (PO) — Suas Responsabilidades
 
-## Seu papel no projeto
-Vocês são as pessoas que transformam **números** em **argumentos**. A equipe de dados vai gerar percentuais e gráficos. Vocês vão pegar esses números e explicar **por que eles importam**, usando a legislação brasileira como base.
+### O que você faz:
+1. **Valida** toda entrega da equipe de dados (valores batem com o backlog?)
+2. **Redige** o artigo final — Introdução, Metodologia, Resultados, Discussão e Conclusão
+3. **Insere** as referências legais na narrativa (LBI, Decreto 5.296, e-MAG)
+4. **Coordena** o cronograma e as entregas semanais
+5. **Monta** os slides da apresentação
 
-Vocês também cuidam da **formatação ABNT**, do **cronograma** e da **redação final**.
-
-**Vocês NÃO precisam:**
-- Mexer em código ou Python
-- Abrir o arquivo CSV
-- Entender estatística avançada
-
-**Vocês PRECISAM:**
-- Ler e fichar leis específicas
-- Escrever textos claros conectando dados com leis
-- Manter o cronograma atualizado
-- Formatar o trabalho em ABNT
-
----
-
-## TAREFA 1 — Fichamento das Leis (Sprint 1)
-**Prazo:** Entregar na próxima quarta-feira  
-**Conexão com o backlog:** Alimenta TODOS os Épicos
-
-### O que fazer, passo a passo:
-
-**1.1 — Lei Brasileira de Inclusão (Lei 13.146/2015)**
-- Abram o site: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm
-- Leiam e ficharem os seguintes artigos:
-
-| Artigo | O que diz (em resumo) | Onde usamos no projeto |
+### Referências legais que você cita no texto:
+| Dado | Lei | Artigo |
 |---|---|---|
-| **Art. 28, inciso V** | Escolas devem oferecer recursos de tecnologia assistiva | Quando mostrarmos que escolas com alunos PcD NÃO têm recursos (US-1.5) |
-| **Art. 28, inciso XI** | Formação de professores para uso de tecnologia com inclusão | Quando mostrarmos que gestores sem formação têm menos acessibilidade (US-4.3) |
-| **Art. 28, inciso XIV** | Oferta de recursos de tecnologia assistiva e de informação | Reforço para todos os dados do Módulo D (P32) |
-| **Art. 63** | Obrigatoriedade de acessibilidade em sítios de Internet | Quando mostrarmos que plataformas foram adotadas sem acessibilidade (US-1.1 e US-1.2) |
-| **Art. 67** | Acessibilidade em serviços de comunicação | Quando falarmos da Sala de Recursos sem Internet (US-2.7) |
+| 73,8% plataformas vs. 34% materiais acessíveis | LBI 13.146/2015 | Art. 63 (acessibilidade em sítios) |
+| Hardware 19,6%, Software 15,9% | LBI | Art. 28, V e XIV (TI acessíveis) |
+| Rural 4,1x menos aulas assistivas | LBI + CF | Art. 28 LBI + Art. 206 CF |
+| Infra como pré-condição (33x gap) | Decreto 5.296/2004 | Art. 47 |
+| Funil 43,5%→35,1% | LBI | Art. 67 (comunicações) |
+| Google domina 59,4% | LBI | Art. 63 (plataformas públicas) |
 
-**Como o fichamento deve ficar:**
-```
-LEI: Lei Brasileira de Inclusão (13.146/2015)
-ARTIGO: Art. 63
-TEXTO ORIGINAL: "É obrigatória a acessibilidade nos sítios da internet
-mantidos por empresas com sede ou representação comercial no País ou por
-órgãos de governo, para uso da pessoa com deficiência [...]"
-
-RESUMO COM MINHAS PALAVRAS: A lei obriga que qualquer site ou plataforma
-usada pelo governo (inclusive escolas públicas) seja acessível.
-
-COMO USAMOS NO PROJETO: Quando a equipe de dados mostrar que X% das escolas
-usam Google Classroom mas não têm software de leitura de tela, citamos
-este artigo para mostrar que isso é uma violação legal.
-```
-
-**1.2 — Decreto 5.296/2004**
-- Site: https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/decreto/d5296.htm
-- Foco no **Art. 47** (acessibilidade em portais e sítios eletrônicos)
-- Fichamento no mesmo formato acima
-
-**1.3 — Portaria MEC 3.284/2003**
-- Pesquisem no Google: "Portaria MEC 3.284 2003"
-- Foco: requisitos de acessibilidade para credenciamento de instituições de ensino
-- Fichamento no mesmo formato
-
-**1.4 — e-MAG (Modelo de Acessibilidade em Governo Eletrônico)**
-- Site: https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital
-- Leiam a seção sobre recomendações de acessibilidade
-- Anotem no fichamento: quais recomendações do e-MAG seriam aplicáveis a plataformas educacionais (Google Classroom, Moodle etc.)?
-
-### Entregável:
-Um documento Word ou Google Docs com os 4 fichamentos, usando o formato acima. Enviar para o Gabriel.
-
----
-
-## TAREFA 2 — Tabela "Dado → Argumento Jurídico" (Sprint 2)
-**Prazo:** Uma semana após receber os gráficos da Equipe de Dados  
-**Conexão com o backlog:** Épicos 1, 2 e 4
-
-### O que fazer:
-A equipe de dados vai entregar gráficos e percentuais. Vocês vão criar uma tabela conectando cada número a uma lei. Exemplo:
-
-| Dado estatístico (vem dos Dados) | Argumento (vocês escrevem) | Lei citada |
-|---|---|---|
-| "72% das escolas usam plataformas digitais, mas apenas 18% possuem algum recurso de tecnologia assistiva" | "A digitalização das escolas brasileiras ocorreu de forma excludente, em descumprimento ao Art. 63 da LBI que obriga acessibilidade em plataformas digitais utilizadas pelo poder público" | Art. 63, Lei 13.146/2015 |
-| "No Centro-Oeste, apenas 12% das escolas públicas possuem software assistivo, contra 35% das particulares" | "O abismo entre as redes evidencia que o poder público não cumpre suas obrigações..." | Art. 28, V, Lei 13.146/2015 |
-
-*Os números acima são fictícios. Usem os reais que a equipe de dados enviar.*
-
-### Entregável:
-Tabela com pelo menos 6 linhas (uma para cada análise MUST HAVE do backlog).
-
----
-
-## TAREFA 3 — Redação Final e ABNT (Sprint 4)
-**Conexão com o backlog:** Consolidação final
-
-### O que fazer:
-- Escrever o artigo/trabalho final usando a estrutura:
-  1. **Introdução** — Problema da exclusão digital na educação inclusiva
-  2. **Referencial Teórico** — Fichamentos das leis (Tarefa 1)
-  3. **Metodologia** — Descrever a base TIC Educação 2024 (Gabriel fornece o texto técnico)
-  4. **Resultados** — Cada gráfico + a interpretação jurídica (Tarefa 2)
-  5. **Conclusão** — Recomendações de política pública
-- Formatar em ABNT (fonte, margens, citações, referências)
-- Montar os slides da apresentação
-
-### Entregável:
-Documento final em Word (.docx) + Slides (PowerPoint ou Google Slides).
-
----
-
-## TAREFA 4 — Controle de Cronograma (Contínuo)
-
-### O que fazer:
-Manter atualizada uma planilha simples com o status de cada equipe:
-
-| Semana | Equipe de Dados | Equipe ADS | Secretariado | Status |
-|---|---|---|---|---|
-| Sem 1 | Limpeza do CSV | Ajuda na limpeza | Fichamento de leis | 🟡 Em andamento |
-| Sem 2 | Gráficos Épico 1 e 2 | Modelo preditivo | Tabela Dado→Lei | ⚪ Não iniciado |
-| Sem 3 | Gráficos Épico 4 | Árvore de Decisão | Redação parcial | ⚪ Não iniciado |
-| Sem 4 | Dashboard Power BI | Revisão final | Texto + Slides | ⚪ Não iniciado |
-
-**Enviar print dessa planilha para o Gabriel toda quarta antes das 18h.**
+### Sprint por sprint:
+- **Sprint 1:** Validar extração de dados. Pesquisar bibliograficamente as leis (não fichamento extenso — citação direta no artigo).
+- **Sprint 2:** Validar gráficos MUST HAVE. Dar GO.
+- **Sprint 3:** Validar SHOULD/COULD. Iniciar redação (Introdução + Metodologia).
+- **Sprint 4:** Finalizar artigo completo (ABNT), montar slides, revisão coletiva.
 
 ---
 ---
@@ -173,447 +83,540 @@ Manter atualizada uma planilha simples com o status de cada equipe:
 # EQUIPE DE DADOS (2 pessoas)
 
 ## Seu papel no projeto
-Vocês são quem **mexe nos dados de verdade**. Vão abrir o arquivo CSV gigante, limpar os dados ruins, filtrar o que interessa e gerar os gráficos e tabelas que respondem às perguntas do backlog.
 
-**Ferramentas que vocês vão usar:**
-- **Python** com **Pandas** (para limpar e filtrar)
-- **Power BI** OU **Matplotlib/Seaborn** (para gráficos)
-- **Jupyter Notebook** (recomendado para organizar o trabalho)
+Vocês são quem **responde às perguntas do projeto com dados**. Vão abrir os XLSX, extrair os dados relevantes, e gerar gráficos e tabelas que respondem cada pergunta do backlog.
+
+**⚠️ IMPORTANTE: São tabelas de indicadores (dados agregados e ponderados), NÃO microdados. Cada aba = um indicador, cada linha = um segmento (Total, Região, Zona, etc.).**
+
+**Ferramentas:**
+- **Python** com **Pandas** + **openpyxl** (para ler Excel)
+- **Matplotlib/Seaborn** (para gráficos)
+- **Jupyter Notebook** (recomendado)
 
 **Vocês NÃO precisam:**
-- Pesquisar leis
-- Escrever o texto acadêmico
-- Criar modelos preditivos (isso é do ADS)
+- Pesquisar leis ou escrever texto acadêmico
+- Criar modelos preditivos (impossível com esses dados)
 
 ---
 
-## TAREFA 1 — Download e Exploração Inicial (Sprint 1, dia 1-2)
-**Conexão com o backlog:** Pré-requisito de TUDO
+## TAREFA 1 — Exploração e Entendimento da Estrutura (Sprint 1, dia 1-2)
+**Conexão com o backlog:** Seção 0 (Natureza dos Dados)
 
 ### O que fazer:
 
-**1.1 — Baixar os microdados**
-- Acessem: https://cetic.br/pt/pesquisa/educacao/microdados/
-- Baixem o arquivo da **TIC Educação 2024 — Escolas/Gestores**
-- Descompactem e coloquem o CSV na pasta do projeto
-
-**1.2 — Primeiro olhar nos dados**
-Abram um Jupyter Notebook e rodem:
+**1.1 — Conferir os 3 arquivos na pasta do projeto**
 ```python
 import pandas as pd
+import os
 
-# Ajuste o nome do arquivo conforme o que vocês baixaram
-df = pd.read_csv('nome_do_arquivo.csv', sep=';', encoding='latin-1')
+pasta = '.'  # pasta do projeto
+arquivos = [f for f in os.listdir(pasta) if f.endswith('.xlsx')]
+print("Arquivos encontrados:")
+for a in arquivos:
+    print(f"  {a}")
+```
 
-# Ver primeiras linhas
-print(df.shape)  # quantas linhas e colunas?
-print(df.columns.tolist())  # nomes das colunas
-df.head()
+Vocês devem encontrar:
+- `tic_educacao_2024_escolas_tabela_proporcao_v1.0.xlsx` — **PRINCIPAL (percentuais)**
+- `tic_educacao_2024_escolas_tabela_total_v1.0.xlsx` — Contagens absolutas
+- `tic_educacao_2024_gestores_dicionario_de_variaveis_v1.0.xlsx` — Dicionário (referência)
+
+**1.2 — Listar todas as abas do arquivo de proporção**
+```python
+xls = pd.ExcelFile('tic_educacao_2024_escolas_tabela_proporcao_v1.0.xlsx')
+print(f"Total de abas: {len(xls.sheet_names)}")
+for i, nome in enumerate(xls.sheet_names, 1):
+    print(f"  {i:2d}. {nome}")
+```
+
+**1.3 — Entender a estrutura de UMA aba (D2 é a mais importante)**
+```python
+df_d2 = pd.read_excel(
+    'tic_educacao_2024_escolas_tabela_proporcao_v1.0.xlsx',
+    sheet_name='D2',
+    header=None  # as primeiras linhas são cabeçalho irregular
+)
+print(df_d2.to_string())  # ver tudo
 ```
 
 **Anotem e enviem ao Gabriel:**
-- Quantas linhas (escolas) tem o arquivo?
-- O separador é `;` ou `,`?
-- O encoding é `latin-1` ou `utf-8`?
-- As colunas batem com o dicionário? (ex: existe `P32_A`, `P42_2_AGREG` etc.?)
+- Quantas abas existem?
+- Como é a estrutura de D2? (quantas linhas, quais colunas)
+- Quais são os segmentos listados nas linhas?
 
 ---
 
-## TAREFA 2 — Limpeza dos Dados (Sprint 1, dia 2-4)
-**Conexão com o backlog:** Seção 1 do BACKLOG (Regras de Negócio para ETL)
+## TAREFA 2 — Extração Padronizada de Todas as Abas (Sprint 1, dia 2-4)
+**Conexão com o backlog:** Seção 1 (Mapeamento de Abas)
 
 ### O que fazer:
 
-**2.1 — Tratar os valores especiais (97, 98, 99)**
+**2.1 — Função para extrair uma aba com estrutura padrão**
 
 ```python
+import pandas as pd
 import numpy as np
 
-# Colunas que vamos usar no projeto (conferir com o dicionário)
-colunas_binarias = [
-    'P31',           # Tem alunos com deficiência?
-    'P32_A',         # Hardware assistivo
-    'P32_B',         # Software assistivo
-    'P32_C',         # Aulas de informática assistiva
-    'P32_D',         # Materiais digitais acessíveis
-    'P24_G',         # Sala de Recursos Multifuncionais
-    'P25_G',         # Internet na Sala de Recursos
-    'P26_G',         # Aluno acessa Internet na Sala de Recursos
-    'P42_2_A',       # Teams
-    'P42_2_B',       # Zoom
-    'P42_2_C1',      # Google Classroom
-    'P42_2_D',       # Moodle
-    'P42_2_F',       # Google Meet
-    'P42_2_G',       # AVAMEC
-    'P42_2_OUTRO',   # Outra plataforma
-    'P8',            # Tem Internet
-    'P10_A',         # Computador de mesa
-    'P10_B',         # Notebook
-    'P10_C',         # Tablet
-    'P22',           # Wi-Fi
-    'P59',           # Formação em TIC (ensino)
-    'P73',           # Formação em TIC (gestão)
+def extrair_aba(arquivo, nome_aba):
+    """
+    Extrai uma aba do Excel e retorna um DataFrame limpo.
+    Adapte os skiprows e colunas conforme necessário.
+    """
+    df = pd.read_excel(arquivo, sheet_name=nome_aba, header=None)
+    
+    # ATENÇÃO: A estrutura exata pode variar por aba.
+    # Geralmente: linha 0-2 = cabeçalho, linhas seguintes = dados
+    
+    print(f"\n=== Aba: {nome_aba} ===")
+    print(f"Shape: {df.shape}")
+    print(df.head(10).to_string())
+    
+    return df
+
+# Abas que precisamos (do backlog):
+ARQUIVO_PROP = 'tic_educacao_2024_escolas_tabela_proporcao_v1.0.xlsx'
+ARQUIVO_TOTAL = 'tic_educacao_2024_escolas_tabela_total_v1.0.xlsx'
+
+abas_necessarias = [
+    'D1A', 'D2', 'D3A', 'D3B', 'D4', 'D5',    # CORE - Acessibilidade
+    'G4', 'G4A',                                   # Plataformas
+    'A1', 'A2', 'A3_1', 'A4',                     # Infraestrutura Internet
+    'B1', 'B2',                                     # Dispositivos
+    'C1',                                           # Locais com Internet
+    'K1_1',                                         # Aquisição de PCs
 ]
 
-# 97 ("Não sabe") e 98 ("Não respondeu") viram NaN
-for col in colunas_binarias:
-    if col in df.columns:
-        df[col] = df[col].replace({97: np.nan, 98: np.nan})
-
-# ATENÇÃO: O 99 ("Não se aplica") tem tratamento especial!
-# Nas colunas P32_A até P32_D, o 99 aparece quando P31=0 (sem alunos PcD).
-# Por enquanto, vamos manter o 99 e tratar caso a caso nas análises.
+# Explorar cada aba
+for aba in abas_necessarias:
+    try:
+        extrair_aba(ARQUIVO_PROP, aba)
+    except Exception as e:
+        print(f"ERRO na aba {aba}: {e}")
 ```
 
-**2.2 — Criar as colunas novas que o projeto precisa**
+**2.2 — Criar CSVs limpos para cada aba**
 
 ```python
-# COLUNA 1: "Tem algum recurso de acessibilidade?"
-# Regra: 1 se qualquer P32 = 1, senão 0
-# Primeiro, tratar 99 como 0 para esta coluna
-p32_cols = ['P32_A', 'P32_B', 'P32_C', 'P32_D']
-df['TEM_ACESSIBILIDADE'] = df[p32_cols].replace({99: 0}).max(axis=1)
-# max(axis=1) pega o maior valor da linha: se algum for 1, resultado é 1
+def extrair_aba_limpa(arquivo, nome_aba, col_segmento=0, cols_dados=None, 
+                       skip_rows=3, nomes_colunas=None):
+    """
+    Extrai uma aba e retorna DataFrame com segmentação + dados numéricos.
+    """
+    df = pd.read_excel(arquivo, sheet_name=nome_aba, header=None, 
+                        skiprows=skip_rows)
+    
+    resultado = pd.DataFrame()
+    resultado['Segmento'] = df.iloc[:, col_segmento].str.strip()
+    
+    if cols_dados and nomes_colunas:
+        for col_idx, nome in zip(cols_dados, nomes_colunas):
+            resultado[nome] = pd.to_numeric(df.iloc[:, col_idx], errors='coerce')
+    
+    resultado = resultado.dropna(subset=['Segmento'])
+    resultado = resultado[resultado['Segmento'] != '']
+    
+    return resultado
 
-# COLUNA 2: "Usa alguma plataforma digital?"
-# Se a variável P42_2_AGREG já existe no CSV, usar ela
-# Senão, criar manualmente:
-if 'P42_2_AGREG' not in df.columns:
-    plat_cols = ['P42_2_A', 'P42_2_B', 'P42_2_C1', 'P42_2_D', 
-                 'P42_2_F', 'P42_2_G', 'P42_2_OUTRO']
-    df['P42_2_AGREG'] = df[plat_cols].max(axis=1)
+# Salvar CSVs processados
+os.makedirs('dados/processed', exist_ok=True)
 
-# COLUNA 3: "Exclusão Digital Ativa" — Usa plataforma MAS não tem acessibilidade
-df['EXCLUSAO_ATIVA'] = ((df['P42_2_AGREG'] == 1) & 
-                         (df['TEM_ACESSIBILIDADE'] == 0)).astype(int)
-
-# COLUNA 4: Para análise mais restrita — só escolas com alunos PcD
-df['EXCLUSAO_PCD'] = ((df['P31'] == 1) & 
-                       (df['P42_2_AGREG'] == 1) & 
-                       (df['TEM_ACESSIBILIDADE'] == 0)).astype(int)
+# Para cada aba extraída:
+# resultado.to_csv(f'dados/processed/{nome_aba}.csv', index=False, encoding='utf-8-sig')
 ```
 
-**2.3 — Verificar se deu certo**
-```python
-# Conferência rápida
-print("Total de escolas:", len(df))
-print("Escolas com Internet:", df[df['P8']==1].shape[0])
-print("Escolas com plataforma:", df[df['P42_2_AGREG']==1].shape[0])
-print("Escolas com acessibilidade:", df[df['TEM_ACESSIBILIDADE']==1].shape[0])
-print("Exclusão ativa:", df[df['EXCLUSAO_ATIVA']==1].shape[0])
-print("Escolas com PcD:", df[df['P31']==1].shape[0])
-print("Exclusão PcD:", df[df['EXCLUSAO_PCD']==1].shape[0])
-```
+**2.3 — Conferir os dados extraídos com os valores de referência**
 
-**Enviar esses números ao Gabriel para validação antes de seguir.**
+| Indicador | Valor Nacional Esperado |
+|---|---|
+| D1A (% Sim) | 81,4% |
+| D2 Hardware (% Sim) | 19,6% |
+| D2 Software (% Sim) | 15,9% |
+| D2 Aulas (% Sim) | 12,0% |
+| D2 Materiais (% Sim) | 34,0% |
+| D3A (% Sim) | 42,0% |
+| D3B (% Sim) | 43,5% |
+| D4 (% Sim) | 41,2% |
+| D5 (% Sim) | 35,1% |
+| G4A (% Sim) | 73,8% |
+| A1 (% Sim) | 95,9% |
+| B1 (% Sim) | 88,7% |
+
+**Se algum valor NÃO bater, parem e avisem o Gabriel.**
+
+**Enviar para Gabriel:** Todos os CSVs processados + confirmação de validação.
 
 ---
 
-## TAREFA 3 — Gráficos e Tabelas do Épico 1 (Sprint 2)
-**Conexão com o backlog:** US-1.1, US-1.2, US-1.3, US-1.5
+## TAREFA 3 — Responder as Perguntas MUST HAVE (Sprint 2)
+**Conexão com o backlog:** Perguntas P1 a P6
 
-### O que fazer:
+Aqui vocês geram os gráficos que respondem as 6 perguntas obrigatórias do projeto.
 
-> **REGRA DE OURO:** Todo percentual deve usar o PESO amostral!
+---
 
-**3.1 — Função auxiliar para percentual ponderado (copie e use sempre):**
-```python
-def pct_ponderado(df_filtro, coluna, valor, peso='PESO'):
-    """
-    Calcula o percentual ponderado de 'coluna == valor' no dataframe filtrado.
-    Retorna: (percentual, contagem_bruta)
-    """
-    mask_valido = df_filtro[coluna].notna()
-    df_val = df_filtro[mask_valido]
-    
-    numerador = df_val.loc[df_val[coluna] == valor, peso].sum()
-    denominador = df_val[peso].sum()
-    
-    pct = (numerador / denominador) * 100 if denominador > 0 else 0
-    n = df_val[df_val[coluna] == valor].shape[0]
-    
-    return round(pct, 1), n
-```
+### PERGUNTA P1 (US-1.1): "Digitalização vs. Acessibilidade — qual o gap nacional?"
 
-**3.2 — US-1.1: Plataformas vs. Acessibilidade (gráfico de barras lado a lado)**
+**O que extrair:** G4A (TOTAL, coluna Sim) + D2 (TOTAL, 4 colunas Sim)
+
+**Como gerar o gráfico:**
 ```python
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.rcParams['font.family'] = 'DejaVu Sans'
 
-pct_plat, n_plat = pct_ponderado(df, 'P42_2_AGREG', 1)
-pct_acess, n_acess = pct_ponderado(df, 'TEM_ACESSIBILIDADE', 1)
-
-fig, ax = plt.subplots(figsize=(8, 5))
-barras = ax.bar(['Usam Plataformas\nDigitais', 'Possuem Recursos\nde Acessibilidade'], 
-                [pct_plat, pct_acess], 
-                color=['#2196F3', '#FF5722'], width=0.5)
-
-# Colocar o valor em cima de cada barra
-for barra, pct, n in zip(barras, [pct_plat, pct_acess], [n_plat, n_acess]):
-    ax.text(barra.get_x() + barra.get_width()/2, barra.get_height() + 1,
-            f'{pct}%\n(n={n})', ha='center', fontsize=12, fontweight='bold')
-
-ax.set_ylabel('Percentual ponderado (%)')
-ax.set_title('Ilusão da Digitalização:\nAdoção de Plataformas vs. Acessibilidade Digital nas Escolas')
-ax.set_ylim(0, 100)
-plt.tight_layout()
-plt.savefig('grafico_US1_1.png', dpi=150)
-plt.show()
-```
-
-**3.3 — US-1.2: KPI de Exclusão Ativa (gráfico donut)**
-```python
-# Filtrar escolas que usam plataformas
-df_com_plat = df[df['P42_2_AGREG'] == 1].copy()
-
-pct_sem, n_sem = pct_ponderado(df_com_plat, 'TEM_ACESSIBILIDADE', 0)
-pct_com = 100 - pct_sem
-
-fig, ax = plt.subplots(figsize=(6, 6))
-wedges, texts, autotexts = ax.pie(
-    [pct_sem, pct_com], 
-    labels=['SEM acessibilidade', 'COM acessibilidade'],
-    colors=['#FF5722', '#4CAF50'],
-    autopct='%1.1f%%',
-    startangle=90,
-    pctdistance=0.75,
-    textprops={'fontsize': 12}
-)
-# Furo no meio para virar donut
-centro = plt.Circle((0,0), 0.50, fc='white')
-ax.add_artist(centro)
-ax.set_title('Entre escolas que USAM plataformas digitais:\nQuantas possuem recursos de acessibilidade?',
-             fontsize=13, fontweight='bold')
-plt.tight_layout()
-plt.savefig('grafico_US1_2_KPI.png', dpi=150)
-plt.show()
-```
-
-**3.4 — US-1.3: Detalhamento por tipo de recurso (barras horizontais)**
-```python
-recursos = {
-    'P32_A': 'Hardware adaptado\n(teclados, mouses)',
-    'P32_B': 'Software assistivo\n(leitura de tela)',
-    'P32_C': 'Aulas de informática\nassistiva',
-    'P32_D': 'Materiais digitais\nacessíveis (audiolivros)'
-}
-
-# Filtrar escolas com plataformas
-df_plat = df[df['P42_2_AGREG'] == 1].copy()
-
-# Calcular % de cada recurso (trocando 99 por 0)
-resultados = {}
-for col, nome in recursos.items():
-    df_temp = df_plat.copy()
-    df_temp[col] = df_temp[col].replace({99: 0})
-    pct, n = pct_ponderado(df_temp, col, 1)
-    resultados[nome] = {'pct': pct, 'n': n}
-
-nomes = list(resultados.keys())
-pcts = [resultados[n]['pct'] for n in nomes]
-
-fig, ax = plt.subplots(figsize=(10, 5))
-bars = ax.barh(nomes, pcts, color=['#FF9800', '#2196F3', '#9C27B0', '#4CAF50'])
-for bar, pct in zip(bars, pcts):
-    ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
-            f'{pct}%', va='center', fontsize=11, fontweight='bold')
-
-ax.set_xlabel('Percentual ponderado (%)')
-ax.set_title('Tipos de Recurso Assistivo nas Escolas com Plataformas Digitais')
-ax.set_xlim(0, max(pcts) + 15)
-plt.tight_layout()
-plt.savefig('grafico_US1_3.png', dpi=150)
-plt.show()
-```
-
-**3.5 — US-1.5: O percentual mais importante — Escolas com PcD + Plataforma sem Acessibilidade**
-```python
-# Escolas com alunos PcD E que usam plataformas
-df_pcd_plat = df[(df['P31'] == 1) & (df['P42_2_AGREG'] == 1)].copy()
-print(f"Escolas com PcD + Plataformas: {len(df_pcd_plat)}")
-
-pct_sem_acc, n_sem_acc = pct_ponderado(df_pcd_plat, 'TEM_ACESSIBILIDADE', 0)
-print(f">>> {pct_sem_acc}% dessas escolas NÃO possuem NENHUM recurso de acessibilidade (n={n_sem_acc})")
-
-# Esse número é o dado mais forte do projeto!
-# Enviem imediatamente para o Gabriel e para o Secretariado
-```
-
----
-
-## TAREFA 4 — Gráficos e Tabelas do Épico 2 (Sprint 2)
-**Conexão com o backlog:** US-2.1, US-2.2, US-2.4, US-2.7
-
-### O que fazer:
-
-**4.1 — US-2.1: Acessibilidade por Dependência Administrativa**
-```python
-deps = {1: 'Federal', 2: 'Estadual', 3: 'Municipal', 4: 'Particular'}
-
-resultados_dep = {}
-for cod, nome in deps.items():
-    df_dep = df[df['COD_DEPENDENCIA'] == cod].copy()
-    df_dep['TEM_ACESSIBILIDADE'] = df_dep[p32_cols].replace({99: 0}).max(axis=1)
-    pct, n = pct_ponderado(df_dep, 'TEM_ACESSIBILIDADE', 1)
-    resultados_dep[nome] = {'pct': pct, 'n': n}
-    print(f"{nome}: {pct}% (n={n})")
-
-# Gráfico de barras
-nomes = list(resultados_dep.keys())
-pcts = [resultados_dep[n]['pct'] for n in nomes]
-
-fig, ax = plt.subplots(figsize=(8, 5))
-cores = ['#1565C0', '#1976D2', '#42A5F5', '#FF7043']  # azuis para público, laranja para privado
-bars = ax.bar(nomes, pcts, color=cores, width=0.5)
-for bar, pct in zip(bars, pcts):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-            f'{pct}%', ha='center', fontsize=12, fontweight='bold')
-ax.set_ylabel('% com pelo menos 1 recurso assistivo')
-ax.set_title('Acessibilidade Digital por Dependência Administrativa')
-ax.set_ylim(0, 100)
-plt.tight_layout()
-plt.savefig('grafico_US2_1.png', dpi=150)
-plt.show()
-```
-
-**4.2 — US-2.2: Centro-Oeste vs. Regiões**
-```python
-regioes = {1: 'Norte', 2: 'Nordeste', 3: 'Sudeste', 4: 'Sul', 5: 'Centro-Oeste'}
-
-resultados_reg = {}
-for cod, nome in regioes.items():
-    df_reg = df[df['COD_REGIAO'] == cod].copy()
-    df_reg['TEM_ACESSIBILIDADE'] = df_reg[p32_cols].replace({99: 0}).max(axis=1)
-    pct, n = pct_ponderado(df_reg, 'TEM_ACESSIBILIDADE', 1)
-    resultados_reg[nome] = {'pct': pct, 'n': n}
-    print(f"{nome}: {pct}% (n={n})")
-
-# Também calcular a média nacional
-df_temp = df.copy()
-df_temp['TEM_ACESSIBILIDADE'] = df_temp[p32_cols].replace({99: 0}).max(axis=1)
-pct_nacional, _ = pct_ponderado(df_temp, 'TEM_ACESSIBILIDADE', 1)
-
-# Gráfico com linha de referência
-nomes = list(resultados_reg.keys())
-pcts = [resultados_reg[n]['pct'] for n in nomes]
-cores = ['#78909C']*4 + ['#FF5722']  # Centro-Oeste em destaque
-
-fig, ax = plt.subplots(figsize=(10, 5))
-bars = ax.bar(nomes, pcts, color=cores, width=0.5)
-ax.axhline(y=pct_nacional, color='black', linestyle='--', linewidth=1, label=f'Média Nacional ({pct_nacional}%)')
-for bar, pct in zip(bars, pcts):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-            f'{pct}%', ha='center', fontsize=11, fontweight='bold')
-ax.set_ylabel('% com pelo menos 1 recurso assistivo')
-ax.set_title('Acessibilidade Digital por Região — Centro-Oeste em Destaque')
-ax.legend()
-ax.set_ylim(0, 100)
-plt.tight_layout()
-plt.savefig('grafico_US2_2.png', dpi=150)
-plt.show()
-```
-
-**4.3 — US-2.7: Funil da Sala de Recursos Multifuncionais**
-```python
-# Estágio 1: Tem Sala de Recursos?
-pct_sala, n_sala = pct_ponderado(df, 'P24_G', 1)
-
-# Estágio 2: Das que têm, tem Internet lá?
-df_com_sala = df[df['P24_G'] == 1].copy()
-pct_int, n_int = pct_ponderado(df_com_sala, 'P25_G', 1)
-
-# Estágio 3: Das que têm Internet, o aluno pode acessar?
-df_com_internet = df_com_sala[df_com_sala['P25_G'] == 1].copy()
-pct_aluno, n_aluno = pct_ponderado(df_com_internet, 'P26_G', 1)
-
-print(f"Tem Sala de Recursos: {pct_sala}% (n={n_sala})")
-print(f"  └─ Com Internet na Sala: {pct_int}% (n={n_int})")
-print(f"       └─ Aluno acessa Internet: {pct_aluno}% (n={n_aluno})")
-
-# Gráfico de funil
-estagios = ['Tem Sala de\nRecursos (AEE)', 'Sala tem\nInternet', 'Aluno acessa\nInternet na sala']
-# Para o funil, calcular % cumulativo sobre o total
-pct_total_sala = pct_sala
-pct_total_int = round(pct_sala * pct_int / 100, 1)
-pct_total_aluno = round(pct_total_int * pct_aluno / 100, 1)
-valores = [pct_total_sala, pct_total_int, pct_total_aluno]
-
-fig, ax = plt.subplots(figsize=(8, 5))
-cores = ['#4CAF50', '#FF9800', '#F44336']
-bars = ax.barh(estagios[::-1], valores[::-1], color=cores[::-1], height=0.5)
-for bar, pct in zip(bars, valores[::-1]):
-    ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
-            f'{pct}% do total', va='center', fontsize=11, fontweight='bold')
-ax.set_xlabel('% do total de escolas')
-ax.set_title('Funil: Da Sala de Recursos ao Acesso Real do Aluno')
-plt.tight_layout()
-plt.savefig('grafico_US2_7_funil.png', dpi=150)
-plt.show()
-```
-
----
-
-## TAREFA 5 — Gráfico do Funil Completo - Épico 4 (Sprint 2-3)
-**Conexão com o backlog:** US-4.1
-
-```python
-# Funil de 5 estágios (do total de escolas)
-e1, _ = pct_ponderado(df, 'P8', 1)                           # Tem Internet
-
-df_e2 = df[(df['P8']==1)].copy()
-df_e2['TEM_PC'] = df_e2[['P10_A','P10_B','P10_C']].replace({97:np.nan,98:np.nan}).max(axis=1)
-e2, _ = pct_ponderado(df_e2, 'TEM_PC', 1)
-e2_total = round(e1 * e2 / 100, 1)
-
-df_e3 = df_e2[df_e2['TEM_PC']==1].copy()
-e3, _ = pct_ponderado(df_e3, 'P42_2_AGREG', 1)
-e3_total = round(e2_total * e3 / 100, 1)
-
-df_e4 = df_e3[df_e3['P42_2_AGREG']==1].copy()
-df_e4['TEM_ACESSIBILIDADE'] = df_e4[p32_cols].replace({99:0}).max(axis=1)
-e4, _ = pct_ponderado(df_e4, 'TEM_ACESSIBILIDADE', 1)
-e4_total = round(e3_total * e4 / 100, 1)
-
-df_e5 = df_e4[df_e4['TEM_ACESSIBILIDADE']==1].copy()
-df_e5_check = df_e5[(df_e5['P24_G']==1) & (df_e5['P25_G']==1)]
-e5_total = round(len(df_e5_check) / len(df) * 100, 1) # aproximação bruta
-
-estagios = [
-    f'1. Internet\n({e1}%)',
-    f'2. Internet +\nComputador\n({e2_total}%)',
-    f'3. + Plataforma\nDigital\n({e3_total}%)',
-    f'4. + Recurso\nAssistivo\n({e4_total}%)',
-    f'5. + Sala AEE\ncom Internet\n({e5_total}%)'
+indicadores = [
+    'Usam ao menos uma\nplataforma digital\n(G4A)',
+    'Materiais digitais\nacessíveis (D2)',
+    'Hardware\nadaptado (D2)',
+    'Software\nassistivo (D2)',
+    'Aulas de informática\nassistiva (D2)'
 ]
-
-valores = [e1, e2_total, e3_total, e4_total, e5_total]
+valores = [73.84, 33.99, 19.59, 15.88, 12.01]
+cores = ['#2196F3', '#4CAF50', '#FF9800', '#9C27B0', '#F44336']
 
 fig, ax = plt.subplots(figsize=(12, 6))
-cores = ['#4CAF50', '#8BC34A', '#FFC107', '#FF9800', '#F44336']
-bars = ax.bar(estagios, valores, color=cores, width=0.6)
+bars = ax.bar(indicadores, valores, color=cores, width=0.6)
 for bar, val in zip(bars, valores):
     ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
-            f'{val}%', ha='center', fontsize=13, fontweight='bold')
-ax.set_ylabel('% do total de escolas')
-ax.set_title('Funil de Digitalização Inclusiva — A cada etapa, quantas escolas sobrevivem?',
-             fontsize=14, fontweight='bold')
-ax.set_ylim(0, 100)
+            f'{val:.1f}%', ha='center', fontsize=12, fontweight='bold')
+
+ax.set_ylabel('Percentual das escolas (%)', fontsize=12)
+ax.set_title('Digitalização vs. Acessibilidade nas Escolas Brasileiras (2024)\n'
+             'Indicadores nacionais lado a lado — NÃO é cruzamento', fontsize=14)
+ax.set_ylim(0, 90)
+ax.axhline(y=0, color='gray', linewidth=0.5)
+
+ax.text(0.5, -0.12, '⚠️ Cada barra vem de uma aba separada. Comparação contextual, não cruzamento.',
+        transform=ax.transAxes, ha='center', fontsize=9, style='italic', color='gray')
+
 plt.tight_layout()
-plt.savefig('grafico_US4_1_funil_completo.png', dpi=150)
+plt.savefig('graficos/US1_1_panorama.png', dpi=150, bbox_inches='tight')
 plt.show()
 ```
+
+**Resposta esperada:** "73,8% das escolas usam plataformas, mas o recurso assistivo mais presente (materiais digitais) atinge apenas 34%. Aulas de informática assistiva existem em apenas 12% das escolas."
+
+---
+
+### PERGUNTA P2 (US-1.2): "Qual a adoção por segmento? Onde estão os piores gaps?"
+
+**O que extrair:** D2 completo — TODAS as 29 linhas, coluna "Sim" de cada recurso
+
+**Como gerar o gráfico:**
+```python
+import seaborn as sns
+import numpy as np
+
+# Segmentos (29 linhas da aba D2)
+segmentos = ['TOTAL', 'Norte', 'Nordeste', 'Sudeste', 'Sul', 'Centro-Oeste',
+             'Urbana', 'Rural', 'Capital', 'Interior',
+             'Municipal', 'Estadual', 'Particular',
+             'Até 50', '51-150', '151-300', '301-500', '501-1000', '1000+']
+
+# Dados reais confirmados no backlog:
+dados_heatmap = {
+    'Hardware': [19.6, 13.5, 11.1, 29.0, 25.7, 31.8,
+                 26.0, 8.2, 32.0, 17.6,
+                 19.0, 26.5, 12.6,
+                 2.2, 6.1, 21.4, 22.3, 45.1, 53.7],
+    'Software': [15.9, 11.0, 8.7, 25.1, 18.9, 23.5,
+                 21.5, 5.9, 25.0, 14.0,
+                 14.8, 18.7, 14.6,
+                 1.5, 2.3, 21.4, 22.9, 31.7, 31.6],
+    'Aulas': [12.0, 9.3, 4.7, 17.9, 19.5, 22.4,
+              16.6, 4.0, 18.0, 11.0,
+              10.1, 12.0, 16.8,
+              0.3, 5.1, 17.8, 13.9, 22.3, 25.0],
+    'Materiais': [34.0, 17.7, 24.2, 48.8, 40.0, 53.5,
+                  43.7, 16.8, 48.6, 31.7,
+                  29.3, 37.2, 43.4,
+                  6.2, 23.5, 38.5, 41.7, 60.4, 64.4],
+}
+
+df_heat = pd.DataFrame(dados_heatmap, index=segmentos)
+
+fig, ax = plt.subplots(figsize=(10, 14))
+sns.heatmap(df_heat, annot=True, fmt='.1f', cmap='RdYlGn', 
+            linewidths=0.5, ax=ax, vmin=0, vmax=70,
+            cbar_kws={'label': '% das escolas com o recurso'})
+ax.set_title('Recursos de Tecnologia Assistiva por Segmento — D2 (% Sim)\n'
+             'TIC Educação 2024', fontsize=14)
+ax.set_ylabel('')
+plt.tight_layout()
+plt.savefig('graficos/US1_2_heatmap_D2.png', dpi=150, bbox_inches='tight')
+plt.show()
+```
+
+**Resposta esperada:** "Materiais digitais são o recurso mais presente em todos os segmentos (34% nacional). Centro-Oeste lidera tudo. Gaps brutais: Rural tem 3,2x menos hardware; Porte até 50 tem 0,3% de aulas (vs. 25% no Porte 1000+ — gap de 83x)."
+
+---
+
+### PERGUNTA P3 (US-1.3): "Quantas escolas atendem alunos com deficiência?"
+
+**O que extrair:** D1A completo
+
+**Resposta esperada:** "81,4% das escolas têm alunos com deficiência. Rural: 65% vs. Urbana: 90,6%. Porte até 50: 39,6% vs. 1000+: 99%. Isso explica a coluna 'Não se aplica' de D2 (12,8% nacional)."
+
+```python
+# Gráfico de barras horizontal por segmento
+# Usar mesmo padrão do heatmap com dados de D1A
+# Salvar como graficos/US1_3_D1A.png
+```
+
+---
+
+### PERGUNTA P4 (US-2.2): "Centro-Oeste realmente lidera?"
+
+**O que extrair:** D2, linhas de REGIÃO (5 linhas), 4 colunas de recurso
+
+**Como gerar:**
+```python
+regioes = ['Norte', 'Nordeste', 'Sudeste', 'Sul', 'Centro-Oeste']
+media_nac = 19.6  # Hardware, por exemplo
+
+hw_regiao = [13.5, 11.1, 29.0, 25.7, 31.8]
+
+fig, ax = plt.subplots(figsize=(10, 5))
+cores = ['#78909C' if r != 'Centro-Oeste' else '#FF5722' for r in regioes]
+bars = ax.bar(regioes, hw_regiao, color=cores, width=0.5)
+ax.axhline(y=media_nac, color='black', linestyle='--', linewidth=1, 
+           label=f'Média Nacional ({media_nac}%)')
+
+for bar, pct in zip(bars, hw_regiao):
+    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+            f'{pct}%', ha='center', fontsize=12, fontweight='bold')
+
+ax.set_ylabel('% com hardware adaptado')
+ax.set_title('Hardware Assistivo por Região — Centro-Oeste Lidera\n(Aba D2, TIC Educação 2024)')
+ax.legend()
+ax.set_ylim(0, 45)
+plt.tight_layout()
+plt.savefig('graficos/US2_2_regiao_hardware.png', dpi=150)
+plt.show()
+
+# REPITAM para os outros 3 recursos ou façam barras agrupadas (4 × 5)
+```
+
+**Resposta esperada:** "Centro-Oeste LIDERA em todos os 4 recursos. Nordeste é o mais excluído (Hardware 11,1%, Aulas 4,7%). Norte também muito abaixo."
+
+---
+
+### PERGUNTA P5 (US-2.3): "Qual a desigualdade urbano-rural?"
+
+**O que extrair:** D2, linhas Urbana e Rural
+
+```python
+recursos = ['Hardware', 'Software', 'Aulas', 'Materiais']
+urbana = [26.0, 21.5, 16.6, 43.7]
+rural = [8.2, 5.9, 4.0, 16.8]
+gap = [f'{u/r:.1f}x' for u, r in zip(urbana, rural)]
+
+x = range(len(recursos))
+width = 0.35
+
+fig, ax = plt.subplots(figsize=(10, 6))
+bars1 = ax.bar([i - width/2 for i in x], urbana, width, label='Urbana', color='#2196F3')
+bars2 = ax.bar([i + width/2 for i in x], rural, width, label='Rural', color='#FF5722')
+
+for i, g in enumerate(gap):
+    y_max = max(urbana[i], rural[i])
+    ax.text(i, y_max + 2, f'Gap: {g}', ha='center', fontsize=10, fontweight='bold', color='red')
+
+for bars, vals in [(bars1, urbana), (bars2, rural)]:
+    for bar, val in zip(bars, vals):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
+                f'{val}%', ha='center', fontsize=10)
+
+ax.set_ylabel('% das escolas com o recurso')
+ax.set_title('O Abismo Urbano-Rural na Acessibilidade Digital\n(Aba D2, TIC Educação 2024)')
+ax.set_xticks(x)
+ax.set_xticklabels(recursos)
+ax.legend()
+ax.set_ylim(0, 60)
+plt.tight_layout()
+plt.savefig('graficos/US2_3_urbano_rural.png', dpi=150)
+plt.show()
+```
+
+**Resposta esperada:** "Gaps de 2,6x (materiais) a 4,1x (aulas). Escola rural tem aulas assistivas em apenas 4% dos casos vs. 16,6% na urbana."
+
+---
+
+### PERGUNTA P6 (US-3.1): "O funil da Sala de Recursos — quanta perda?"
+
+**O que extrair:** D3B (43,5%), D4 (41,2%), D5 (35,1%) — linha TOTAL de cada
+
+```python
+estagios = ['Tem Sala de Recursos\nMultifuncionais\n(D3B)', 
+            'Sala tem\nInternet\n(D4)', 
+            'Aluno acessa\nInternet na Sala\n(D5)']
+valores = [43.5, 41.2, 35.1]
+
+fig, ax = plt.subplots(figsize=(8, 6))
+cores = ['#4CAF50', '#FF9800', '#F44336']
+bars = ax.barh(estagios[::-1], valores[::-1], color=cores[::-1], height=0.5)
+
+for bar, val in zip(bars, valores[::-1]):
+    ax.text(bar.get_width() + 0.5, bar.get_y() + bar.get_height()/2,
+            f'{val}%', va='center', fontsize=13, fontweight='bold')
+
+ax.set_xlabel('% das escolas com Internet')
+ax.set_title('Funil da Sala de Recursos Multifuncionais\n'
+             'Perda progressiva do recurso ao acesso real do aluno\n'
+             '(Base: escolas com Internet — TIC Educação 2024)', fontsize=13)
+ax.set_xlim(0, 55)
+
+ax.text(38, 0.5, f'Perda: {43.5-35.1:.1f} p.p.', fontsize=11, color='red', fontweight='bold')
+
+plt.tight_layout()
+plt.savefig('graficos/US3_1_funil_sala_recursos.png', dpi=150, bbox_inches='tight')
+plt.show()
+```
+
+**Resposta esperada:** "43,5% têm Sala → 41,2% com Internet na Sala → 35,1% onde o aluno acessa. Perda de 8,4 pontos percentuais. Quase 20% das escolas com Sala de Recursos 'perdem' o aluno entre ter e acessar."
+
+**NOTA:** Este é o ÚNICO funil legítimo do projeto (mesma base amostral).
+
+---
+
+## TAREFA 4 — Responder as Perguntas SHOULD HAVE (Sprint 3)
+**Conexão com o backlog:** Perguntas P7 a P11
+
+### PERGUNTA P7 (US-2.1): "Municipal vs. Estadual vs. Particular?"
+
+**Dados confirmados:**
+
+| Recurso | Municipal | Estadual | Particular |
+|---|---|---|---|
+| Hardware | 19,0% | 26,5% | 12,6% |
+| Software | 14,8% | 18,7% | 14,6% |
+| Aulas | 10,1% | 12,0% | 16,8% |
+| Materiais | 29,3% | 37,2% | 43,4% |
+
+**Entrega:** `graficos/US2_1_dependencia.png`
+
+---
+
+### PERGUNTA P8 (US-2.5): "O tamanho da escola importa?"
+
+**Dados confirmados — ACHADO MAIS DRAMÁTICO:**
+
+| Porte | Hardware | Software | Aulas | Materiais |
+|---|---|---|---|---|
+| Até 50 | 2,2% | 1,5% | **0,3%** | 6,2% |
+| 1000+ | 53,7% | 31,6% | **25,0%** | 64,4% |
+
+Gap de **83x** em aulas assistivas.
+
+```python
+portes = ['Até 50', '51-150', '151-300', '301-500', '501-1000', '1000+']
+hw_porte = [2.2, 6.1, 21.4, 22.3, 45.1, 53.7]
+
+fig, ax = plt.subplots(figsize=(10, 5))
+cores = plt.cm.RdYlGn(np.linspace(0.1, 0.9, len(portes)))
+bars = ax.bar(portes, hw_porte, color=cores, width=0.6)
+
+for bar, val in zip(bars, hw_porte):
+    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+            f'{val}%', ha='center', fontsize=11, fontweight='bold')
+
+ax.set_ylabel('% com hardware adaptado')
+ax.set_title('Hardware Assistivo por Porte — Gap de 24x\n(Aba D2, TIC Educação 2024)')
+ax.set_ylim(0, 65)
+
+ax.annotate(f'Gap: {53.7/2.2:.0f}x', xy=(0, 2.2), xytext=(1.5, 45),
+            arrowprops=dict(arrowstyle='->', color='red', lw=2),
+            fontsize=14, fontweight='bold', color='red')
+
+plt.tight_layout()
+plt.savefig('graficos/US2_5_porte.png', dpi=150)
+plt.show()
+```
+
+**Entrega:** `graficos/US2_5_porte.png`
+
+---
+
+### PERGUNTA P9 (US-2.7): "Internet+Computador é pré-condição?"
+
+**Dados:**
+
+| Recurso | Com Infra | Sem Infra | Gap |
+|---|---|---|---|
+| Hardware | 31,7% | 2,3% | 13,8x |
+| Software | 26,0% | 1,5% | 17,3x |
+| Aulas | 20,0% | 0,6% | **33,3x** |
+| Materiais | 50,0% | 11,2% | 4,5x |
+
+**Entrega:** `graficos/US2_7_infra.png` (mesmo padrão do urbano-rural)
+
+---
+
+### PERGUNTA P10 (US-4.1): "A Escadaria da Exclusão — todos os indicadores lado a lado"
+
+```python
+indicadores = [
+    'Internet\n(A1)', 'Computador\n(B1)', 'Plataforma\n(G4A)',
+    'Alunos PcD\n(D1A)', 'Materiais\nacessíveis\n(D2)',
+    'Hardware\nassistivo\n(D2)', 'Software\nassistivo\n(D2)',
+    'Aulas\nassistivas\n(D2)', 'Sala de\nRecursos\n(D3B)'
+]
+valores = [95.9, 88.7, 73.8, 81.4, 34.0, 19.6, 15.9, 12.0, 43.5]
+
+# Ordenar do maior ao menor
+pares = sorted(zip(valores, indicadores), reverse=True)
+valores_ord = [p[0] for p in pares]
+indicadores_ord = [p[1] for p in pares]
+
+fig, ax = plt.subplots(figsize=(14, 6))
+cores = ['#4CAF50' if v > 50 else '#FF9800' if v > 30 else '#F44336' for v in valores_ord]
+bars = ax.bar(indicadores_ord, valores_ord, color=cores, width=0.6)
+
+for bar, val in zip(bars, valores_ord):
+    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
+            f'{val}%', ha='center', fontsize=11, fontweight='bold')
+
+ax.set_ylabel('% das escolas')
+ax.set_title('Escadaria da Exclusão Digital: Do Básico ao Inclusivo\n'
+             '⚠️ Cada barra é um indicador independente — NÃO são estágios cumulativos',
+             fontsize=13)
+ax.set_ylim(0, 110)
+plt.tight_layout()
+plt.savefig('graficos/US4_1_escadaria.png', dpi=150, bbox_inches='tight')
+plt.show()
+```
+
+**Entrega:** `graficos/US4_1_escadaria.png`
+
+---
+
+### PERGUNTA P11 (US-1.5): "Quantas escolas nem são perguntadas?"
+
+**Dados:** D2 coluna "Não se aplica" — Nacional 12,8%, Rural 35,2%, Porte até 50: 38,2%
+
+**Entrega:** `graficos/US1_5_nsa.png` + texto explicativo para a Metodologia
+
+---
+
+## TAREFA 5 — Responder Perguntas COULD HAVE (Sprint 3, se der tempo)
+
+Perguntas P12 a P19. Mesmo padrão: extrair, gerar gráfico, documentar resposta.
+Foco em P12 (plataformas) e P18 (Google por segmento) se houver tempo.
 
 ---
 
 ## CHECKLIST FINAL — Equipe de Dados
 
-Antes de enviar os resultados, confiram:
+Antes de enviar os resultados:
 
-- [ ] Todos os percentuais usam a coluna `PESO`?
-- [ ] Todos os gráficos mostram o `n` (contagem bruta) além do `%`?
-- [ ] Os valores 97 e 98 foram removidos antes de calcular?
-- [ ] O tratamento do 99 está documentado (excluiu ou tratou como 0)?
-- [ ] Os gráficos foram salvos como PNG em alta resolução (dpi=150)?
-- [ ] Os notebooks estão com nomes claros? (ex: `01_limpeza.ipynb`, `02_epico1.ipynb`)
+- [ ] Valores nacionais extraídos batem com a tabela de referência (Tarefa 2.3)?
+- [ ] Todos os gráficos têm título, rótulos e legenda?
+- [ ] Gráficos com indicadores de abas diferentes têm nota metodológica?
+- [ ] O funil (P6) usa apenas D3B, D4, D5 (mesma base)?
+- [ ] Gráficos salvos como PNG em alta resolução (dpi=150)?
+- [ ] Notebooks com nomes claros? (01_extracao.ipynb, 02_epico1.ipynb, etc.)
+- [ ] CSVs processados em `dados/processed/`?
+- [ ] Para cada pergunta respondida: há um parágrafo-resposta documentado?
 
 ---
 ---
@@ -621,262 +624,290 @@ Antes de enviar os resultados, confiram:
 # EQUIPE ADS (1 pessoa)
 
 ## Seu papel no projeto
-Você é quem vai além da análise descritiva. Enquanto a equipe de dados responde "**o que acontece**", você responde "**por que acontece**" e "**é possível prever**". Vai construir um modelo estatístico para identificar quais características de uma escola preveem a falta de acessibilidade.
+
+**⚠️ Com tabelas de indicadores, NÃO é possível criar modelos preditivos (ML).**
+
+**Seu papel:** Construir o **Dashboard no Power BI** para a apresentação final. Você também pode criar visualizações interativas em Python (Plotly).
 
 **Ferramentas:**
-- Python com `scikit-learn` e/ou `statsmodels`
-- Jupyter Notebook
-
-**Você NÃO precisa:**
-- Pesquisar leis
-- Fazer a limpeza do CSV (a equipe de dados faz isso e te entrega o DataFrame limpo)
-- Escrever o texto final
-
-**Você PRECISA:**
-- Receber o DataFrame limpo da equipe de dados
-- Construir o modelo de regressão logística
-- Gerar a árvore de decisão
-- Interpretar os resultados em linguagem simples
+- **Power BI** (foco principal)
+- **Python** com Plotly (opcional — gráficos interativos)
 
 ---
 
-## TAREFA 1 — Preparar os dados para modelagem (Sprint 2)
-**Conexão com o backlog:** US-3.1 (Regressão Logística)
+## TAREFA 1 — Receber e Organizar os Dados (Sprint 2)
 
 ### O que fazer:
+- Receber os CSVs processados de `dados/processed/`
+- Importar no Power BI
+- Criar relacionamentos (todos os CSVs têm a coluna "Segmento" em comum)
 
-**1.1 — Receber o DataFrame limpo e criar a base de modelagem**
-```python
-import pandas as pd
-import numpy as np
+---
 
-# A equipe de dados vai te passar o df já limpo
-# Você precisa criar a base para o modelo
+## TAREFA 2 — Dashboard Power BI (Sprint 2-3)
 
-# Variável alvo (o que queremos prever):
-# 0 = tem acessibilidade, 1 = NÃO tem acessibilidade
-# (já criada pela equipe de dados como TEM_ACESSIBILIDADE)
-df['Y_SEM_ACESSIBILIDADE'] = (df['TEM_ACESSIBILIDADE'] == 0).astype(int)
+### Páginas sugeridas:
 
-# Variáveis preditoras (as "características" da escola):
-preditores = [
-    'COD_ZONA',           # 1=Urbana, 2=Rural
-    'PORTE',              # 1 a 6
-    'COD_DEPENDENCIA',    # 1 a 4
-    'COD_REGIAO',         # 1 a 5
-    'COD_TIPO_CIDADE',    # 1=Capital, 2=Interior
-    'NIVEL_ENSINO',       # 1 a 3
-    'P8',                 # Tem Internet (0/1)
-    'P10_AGREG',          # Tem computador (0/1)
-    'P59_P73_AGREG',      # Gestor fez formação TIC (0/1)
-    'P42_2_AGREG',        # Usa plataformas (0/1)
-]
+**Página 1 — Panorama Nacional (P1)**
+- 5 KPIs grandes: Internet (95,9%), Computador (88,7%), Plataformas (73,8%), Materiais (34%), Hardware (19,6%)
+- Gráfico de barras: Digitalização vs. Acessibilidade
 
-# Criar base limpa (sem NaN nos preditores)
-df_modelo = df[preditores + ['Y_SEM_ACESSIBILIDADE', 'PESO']].dropna()
-print(f"Linhas para modelagem: {len(df_modelo)} de {len(df)} ({len(df_modelo)/len(df)*100:.0f}%)")
+**Página 2 — Heatmap da Desigualdade (P2)**
+- Heatmap ou matriz: 4 recursos × segmentos selecionáveis (filtro slicer)
+- Filtros: Região, Zona, Dependência, Porte
+
+**Página 3 — O Abismo Geográfico (P4, P5)**
+- Barras agrupadas: Urbano vs. Rural (4 recursos)
+- Barras por Região com linha de média nacional
+- Barras por Porte (escadaria)
+
+**Página 4 — Funil da Sala de Recursos (P6)**
+- Gráfico de funil: D3B → D4 → D5
+- Versão segmentada (se der tempo): funil por região ou zona
+
+**Página 5 — Infraestrutura e Plataformas (P9, P12)**
+- Internet (A1) por segmento
+- Plataformas específicas (G4)
+
+### Dicas Power BI:
 ```
-
-**1.2 — Transformar variáveis categóricas**
-```python
-# COD_DEPENDENCIA, COD_REGIAO, PORTE e NIVEL_ENSINO são categóricas ordinais
-# Para a regressão, precisamos de dummies (one-hot encoding)
-categoricas = ['COD_DEPENDENCIA', 'COD_REGIAO', 'PORTE', 'NIVEL_ENSINO']
-df_modelo_encoded = pd.get_dummies(df_modelo, columns=categoricas, drop_first=True)
-
-print("Colunas finais:", df_modelo_encoded.columns.tolist())
+- Importar CSVs via "Obter Dados > Texto/CSV"
+- Usar "Segmento" como chave comum entre tabelas
+- Os dados já vêm prontos como percentuais, não precisa calcular
+- Usar slicers para filtrar por segmento
+- Usar "Cartão" para KPIs
+- Usar "Gráfico de Barras Agrupadas" para comparações
+- Usar "Gráfico de Funil" para P6
 ```
 
 ---
 
-## TAREFA 2 — Regressão Logística (Sprint 3)
-**Conexão com o backlog:** US-3.1
-
-### O que fazer:
+## TAREFA 3 — Gráficos Interativos em Python (Opcional, Sprint 3)
 
 ```python
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report, roc_auc_score, confusion_matrix
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
-# Separar X (preditores) e y (alvo)
-X = df_modelo_encoded.drop(columns=['Y_SEM_ACESSIBILIDADE', 'PESO'])
-y = df_modelo_encoded['Y_SEM_ACESSIBILIDADE']
-pesos = df_modelo_encoded['PESO']
-
-# Dividir em treino (70%) e teste (30%)
-X_train, X_test, y_train, y_test, w_train, w_test = train_test_split(
-    X, y, pesos, test_size=0.3, random_state=42, stratify=y
-)
-
-# Treinar o modelo
-modelo = LogisticRegression(max_iter=1000, random_state=42)
-modelo.fit(X_train, y_train, sample_weight=w_train)
-
-# Avaliar
-y_pred = modelo.predict(X_test)
-y_prob = modelo.predict_proba(X_test)[:, 1]
-
-print("=== RESULTADOS ===")
-print(classification_report(y_test, y_pred))
-print(f"AUC-ROC: {roc_auc_score(y_test, y_prob, sample_weight=w_test):.3f}")
-```
-
-**2.2 — Gráfico de Importância das Variáveis (Odds Ratio)**
-```python
-# Odds Ratio: exp(coeficiente). Se > 1, aumenta a chance de NÃO ter acessibilidade
-coefs = pd.DataFrame({
-    'Variavel': X.columns,
-    'Coeficiente': modelo.coef_[0],
-    'Odds_Ratio': np.exp(modelo.coef_[0])
-}).sort_values('Odds_Ratio', ascending=True)
-
-print(coefs.to_string())
-
-# Gráfico
-fig, ax = plt.subplots(figsize=(10, 8))
-cores = ['#F44336' if or_val > 1 else '#4CAF50' for or_val in coefs['Odds_Ratio']]
-ax.barh(coefs['Variavel'], coefs['Odds_Ratio'], color=cores)
-ax.axvline(x=1, color='black', linestyle='--', linewidth=1)
-ax.set_xlabel('Odds Ratio (>1 = aumenta risco de exclusão)')
-ax.set_title('Fatores que Aumentam/Diminuem a Probabilidade de Exclusão Digital')
-plt.tight_layout()
-plt.savefig('grafico_US3_1_odds_ratio.png', dpi=150)
-plt.show()
-```
-
-**O que os resultados significam (para você explicar aos outros):**
-- Odds Ratio = 1.0 → Sem efeito
-- Odds Ratio = 2.0 → "Escolas com essa característica têm 2x mais chance de NÃO ter acessibilidade"
-- Odds Ratio = 0.5 → "Escolas com essa característica têm 50% menos chance de exclusão"
-
----
-
-## TAREFA 3 — Árvore de Decisão (Sprint 3)
-**Conexão com o backlog:** US-3.3
-
-### O que fazer:
-
-```python
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-
-# Treinar árvore rasa (fácil de visualizar)
-arvore = DecisionTreeClassifier(max_depth=4, random_state=42, min_samples_leaf=30)
-arvore.fit(X_train, y_train, sample_weight=w_train)
-
-# Avaliar
-y_pred_tree = arvore.predict(X_test)
-print("=== ÁRVORE DE DECISÃO ===")
-print(classification_report(y_test, y_pred_tree))
-
-# Visualizar a árvore
-fig, ax = plt.subplots(figsize=(25, 12))
-plot_tree(arvore, feature_names=X.columns.tolist(),
-          class_names=['Com Acessibilidade', 'Sem Acessibilidade'],
-          filled=True, rounded=True, fontsize=8, ax=ax)
-plt.title('Árvore de Decisão: Quais características levam à exclusão digital?', fontsize=16)
-plt.tight_layout()
-plt.savefig('grafico_US3_3_arvore.png', dpi=150, bbox_inches='tight')
-plt.show()
-```
-
-**Por que a árvore é importante:**
-Ela mostra uma "receita" visual. Exemplo: "Se a escola é municipal → E é rural → E não tem Internet → 95% de chance de NÃO ter acessibilidade". Isso é **muito poderoso** na apresentação.
-
----
-
-## TAREFA 4 — Perfil da Escola Excluída (Sprint 3)
-**Conexão com o backlog:** US-3.2
-
-```python
-# Filtrar escolas com "Exclusão Ativa" (usam plataforma mas sem acessibilidade)
-df_excluidas = df[df['EXCLUSAO_ATIVA'] == 1].copy()
-df_incluidas = df[(df['P42_2_AGREG']==1) & (df['TEM_ACESSIBILIDADE']==1)].copy()
-
-print("=== PERFIL DA ESCOLA EXCLUÍDA vs. INCLUÍDA ===\n")
-
-# Zona
-for label, grupo in [("EXCLUÍDAS", df_excluidas), ("INCLUÍDAS", df_incluidas)]:
-    pct_rural, _ = pct_ponderado(grupo, 'COD_ZONA', 2)
-    print(f"{label} - % Rural: {pct_rural}%")
-
-# Dependência
-for dep, nome in {1:'Federal', 2:'Estadual', 3:'Municipal', 4:'Particular'}.items():
-    pct_exc, _ = pct_ponderado(df_excluidas, 'COD_DEPENDENCIA', dep)
-    pct_inc, _ = pct_ponderado(df_incluidas, 'COD_DEPENDENCIA', dep)
-    print(f"{nome}: Excluídas={pct_exc}% | Incluídas={pct_inc}%")
-
-# Envie esses resultados ao Gabriel e ao Secretariado
+# Funil interativo
+fig = go.Figure(go.Funnel(
+    y=["Sala de Recursos (D3B)", "Internet na Sala (D4)", "Aluno Acessa (D5)"],
+    x=[43.5, 41.2, 35.1],
+    textinfo="value+percent initial"
+))
+fig.update_layout(title="Funil da Sala de Recursos Multifuncionais")
+fig.show()
+fig.write_html("graficos/funil_interativo.html")
 ```
 
 ---
 
-## CHECKLIST FINAL — Equipe ADS
+## CHECKLIST FINAL — ADS
 
-- [ ] O modelo de regressão convergiu (sem warnings de convergência)?
-- [ ] O AUC-ROC é > 0.60? (Se < 0.55, reportar ao Gabriel — pode ser que as variáveis tenham pouco poder preditivo, o que também é um achado válido)
-- [ ] O gráfico de Odds Ratio está claro e salvo em PNG?
-- [ ] A árvore de decisão tem no máximo 4 níveis (legível)?
-- [ ] Os notebooks estão nomeados? (ex: `03_modelo_regressao.ipynb`, `04_arvore_decisao.ipynb`)
+- [ ] Dashboard Power BI tem pelo menos 4 páginas?
+- [ ] KPIs corretos (batem com valores do backlog)?
+- [ ] Filtros (slicers) funcionam?
+- [ ] Funil da Sala de Recursos incluído?
+- [ ] Notas metodológicas onde necessário?
+- [ ] Arquivo salvo como `powerbi/dashboard.pbix`?
 
 ---
 ---
 
-# COMO TUDO SE CONECTA (Fluxo de Entrega)
+# COMO TUDO SE CONECTA — Fluxo de Entrega
 
 ```
-SEMANA 1                SEMANA 2                SEMANA 3                SEMANA 4
-────────                ────────                ────────                ────────
+SEMANA 1 (Sprint 1)         SEMANA 2 (Sprint 2)
+========================     ========================
+DADOS:                       DADOS:
+  Explora XLSX ──────────►     Gráficos MUST HAVE
+  Extrai CSVs                  (P1, P2, P3, P4, P5, P6)
+  Valida com Gabriel           │
+                               ▼
+ADS:                         ADS:
+  Estuda Power BI ──────►     Dashboard v1
+                               (recebe CSVs)
+                               
+GABRIEL:                     GABRIEL:
+  Valida extração              Valida gráficos
+  Pesquisa leis                GO para Sprint 3
 
-DADOS:                  DADOS:                  DADOS:                  DADOS:
-Limpa CSV ─────────►    Gráficos ──────────►    Gráficos ──────────►    Dashboard
-Cria colunas            Épico 1 + 2             Épico 4                 Power BI
-Valida com Gabriel      │                       │
-                        │                       │
-                        ▼                       ▼
-ADS:                    ADS:                    ADS:
-Aguarda df limpo ──►    Recebe df ─────────►    Modelo + Árvore ───►    Revisão
-                        Prepara base            │
-                                                │
-                        ▼                       ▼
-SECRETARIADO:           SECRETARIADO:           SECRETARIADO:           SECRETARIADO:
-Fichamento de ─────►    Recebe gráficos ──►     Redação parcial ──►     Texto final
-leis (4 docs)           Tabela Dado→Lei         Metodologia             ABNT + Slides
-                                                Resultados
+
+SEMANA 3 (Sprint 3)         SEMANA 4 (Sprint 4)
+========================     ========================
+DADOS:                       DADOS:
+  Gráficos SHOULD+COULD       Revisão final
+  (P7-P11 + P12-P19)
+                             
+ADS:                         ADS:
+  Dashboard com heatmap,       Dashboard final (.pbix)
+  funil, escadaria
+                             
+GABRIEL:                     GABRIEL:
+  Valida análises              Artigo ABNT + Slides
+  Inicia redação               Revisão + Ensaio
 ```
+
+---
+
+# COMO ORGANIZAR O RESULTADO FINAL
+
+## Passo a passo para montar o artigo
+
+Quando TODAS as perguntas estiverem respondidas (gráficos + textos), organize assim:
+
+### Capítulo 1 — INTRODUÇÃO
+**Objetivo:** Convencer o leitor de que o problema importa.
+
+**Conteúdo:**
+- Contexto da digitalização pós-pandemia
+- Dado-gancho: "73,8% das escolas usam plataformas, mas apenas 12% têm aulas de informática assistiva"
+- Pergunta central: "A inclusão digital acompanhou a digitalização?"
+- Justificativa: Educação Inclusiva como tema do projeto de extensão
+
+**Responsável:** Gabriel (PO)
+
+---
+
+### Capítulo 2 — REFERENCIAL TEÓRICO
+**Objetivo:** Mostrar que a lei OBRIGA acessibilidade.
+
+**Conteúdo:**
+- Lei Brasileira de Inclusão (13.146/2015) — Art. 28, 63, 67
+- Decreto 5.296/2004 — Art. 47
+- Portaria MEC 3.284/2003
+- Modelo e-MAG
+- Conceitos: Tecnologia assistiva, Desenho Universal
+
+**Como fazer:** Pesquisa direta nos sites oficiais. Citar os artigos relevantes e explicar em linguagem do projeto.
+
+**Responsável:** Gabriel (PO) — pesquisa bibliográfica + redação
+
+---
+
+### Capítulo 3 — METODOLOGIA
+**Objetivo:** Explicar como investigamos e ser TRANSPARENTE sobre limitações.
+
+**Conteúdo obrigatório:**
+1. Fonte: TIC Educação 2024 (Cetic.br, módulo Gestores, amostra nacional)
+2. Tipo: Tabelas de indicadores AGREGADOS (não microdados)
+3. Estrutura: 69 abas, ~29 segmentos, percentuais já ponderados
+4. Técnica: Análise descritiva comparativa + leitura paralela de indicadores
+5. O que NÃO podemos fazer: cruzamento entre abas, ML, variáveis derivadas
+6. "Não se aplica": 12,8% nacional, 35,2% rural — influencia interpretação
+7. Único funil legítimo: D3B → D4 → D5
+
+**Responsável:** Gabriel (PO) — com dados técnicos da equipe de Dados
+
+---
+
+### Capítulo 4 — RESULTADOS
+**Objetivo:** Apresentar as respostas de cada pergunta com gráficos.
+
+A ordem segue impacto narrativo crescente:
+
+**4.1 — O Retrato Nacional (Setup)**
+| Pergunta | Gráfico | Arquivo |
+|---|---|---|
+| P1: Digitalização vs. Acessibilidade | Barras comparativas | US1_1_panorama.png |
+| P3: Escolas com alunos PcD | Barras por segmento | US1_3_D1A.png |
+| P11: "Não se aplica" | Barras por segmento | US1_5_nsa.png |
+
+**Transição:** "73,8% digitalizaram, mas materiais acessíveis atingem 34%. E 81% têm alunos PcD. Onde estão as maiores desigualdades?"
+
+**4.2 — O Heatmap da Desigualdade (Revelação)**
+| Pergunta | Gráfico | Arquivo |
+|---|---|---|
+| P2: Heatmap D2 completo | Heatmap 29×4 | US1_2_heatmap_D2.png |
+| P4: Regiões | Barras agrupadas | US2_2_regioes.png |
+| P5: Urbano-Rural | Barras lado a lado | US2_3_urbano_rural.png |
+| P8: Porte | Barras com gap | US2_5_porte.png |
+
+**Transição:** "Centro-Oeste lidera. Norte/Nordeste excluídos. Rural 4x menos. Porte até 50: 83x menos. Mas existe uma barreira AINDA mais básica..."
+
+**4.3 — A Barreira Prévia (Contexto Estrutural)**
+| Pergunta | Gráfico | Arquivo |
+|---|---|---|
+| P9: Infra como pré-condição | Barras com gap | US2_7_infra.png |
+| P10: Escadaria da Exclusão | Barras descendentes | US4_1_escadaria.png |
+
+**Transição:** "E quando a escola TEM infraestrutura e TEM Sala de Recursos, os alunos realmente acessam?"
+
+**4.4 — O Funil (Clímax)**
+| Pergunta | Gráfico | Arquivo |
+|---|---|---|
+| P6: Funil da Sala de Recursos | Funnel chart | US3_1_funil.png |
+
+**Impacto:** "Quase 20% das escolas que TÊM Sala de Recursos 'perdem' o aluno entre ter a sala e ele acessar a Internet nela."
+
+---
+
+### Capítulo 5 — DISCUSSÃO
+**Objetivo:** Confrontar dados com leis.
+
+**Conteúdo:**
+Para cada resultado principal, citar a lei correspondente:
+
+| Dado | Argumento | Lei |
+|---|---|---|
+| 73,8% plataformas vs. 34% materiais | Digitalização sem inclusão descumpre Art. 63 LBI | LBI 13.146/2015 |
+| Rural 4,1x menos aulas assistivas | Desigualdade viola igualdade de condições | Art. 28 LBI + Art. 206 CF |
+| Porte até 50: 0,3% aulas assistivas | Escolas pequenas excluídas | Art. 28, XIV LBI |
+| Funil: 43,5% → 35,1% | Inefetividade da Sala de Recursos | Art. 67 LBI |
+| Sem infra: 33x menos aulas | Infra como pré-condição | Decreto 5.296, Art. 47 |
+| Google 59,4% monopolista | Acessibilidade de plataforma dominante | Art. 63 LBI |
+
+**Responsável:** Gabriel (PO)
+
+---
+
+### Capítulo 6 — CONCLUSÃO E RECOMENDAÇÕES
+**Objetivo:** Transformar achados em ações.
+
+**4 Recomendações de Política Pública:**
+1. **Infraestrutura ANTES de digitalizar** — Sem Internet+PC, acessibilidade é zero (P9)
+2. **Políticas focalizadas em rurais e pequenas** — Gaps de 4,1x e 83x (P5, P8)
+3. **Auditoria de acessibilidade no Google** — 59,4% das escolas dependem dele (P12)
+4. **Internet real na Sala de Recursos** — Perda de 8,4 pp no funil (P6)
+
+**Sugestões para pesquisa futura:** O que estes dados NÃO respondem (Seção 9 do backlog)
+
+---
 
 ## Regra de Comunicação
 
 | Situação | O que fazer |
 |---|---|
 | Terminei minha tarefa da semana | Avise no grupo do WhatsApp + envie o arquivo |
-| Estou travado e não consigo avançar | Avise o Gabriel IMEDIATAMENTE (não espere a quarta) |
-| Encontrei algo estranho nos dados | Anote o que encontrou + print da tela → envie ao Gabriel |
-| Não entendi o que preciso fazer | Releia este guia. Se continuar com dúvida, pergunte no grupo |
-| Quero fazer algo diferente do combinado | PERGUNTE ANTES. Não mude o escopo sozinho |
+| Estou travado | Avise o Gabriel IMEDIATAMENTE (não espere a quarta) |
+| Encontrei algo estranho nos dados | Anote + print → envie ao Gabriel |
+| Não entendi o que fazer | Releia este guia. Se continuar com dúvida, pergunte no grupo |
+| Quero mudar algo do escopo | PERGUNTE ANTES |
 
-## Nomenclatura de Arquivos (TODOS seguem)
+## Nomenclatura de Arquivos
 
 ```
-Projeto_extencao/
+ProjetoExtensao2/
 ├── dados/
-│   ├── raw/                         ← CSV original (NÃO MEXER)
-│   └── processed/                   ← CSV limpo
+│   ├── raw/                         ← XLSX originais (NÃO MEXER)
+│   │   ├── tic_educacao_2024_escolas_tabela_proporcao_v1.0.xlsx
+│   │   ├── tic_educacao_2024_escolas_tabela_total_v1.0.xlsx
+│   │   └── tic_educacao_2024_gestores_dicionario_de_variaveis_v1.0.xlsx
+│   └── processed/                   ← CSVs extraídos e limpos
+│       ├── D1A.csv
+│       ├── D2.csv
+│       └── ...
 ├── notebooks/
-│   ├── 01_limpeza.ipynb             ← Equipe de Dados
-│   ├── 02_epico1_ilusao.ipynb       ← Equipe de Dados
+│   ├── 01_extracao_xlsx.ipynb       ← Equipe de Dados
+│   ├── 02_epico1_retrato.ipynb      ← Equipe de Dados
 │   ├── 03_epico2_abismo.ipynb       ← Equipe de Dados
-│   ├── 04_epico4_funil.ipynb        ← Equipe de Dados
-│   ├── 05_regressao_logistica.ipynb ← Equipe ADS
-│   └── 06_arvore_decisao.ipynb      ← Equipe ADS
-├── graficos/                        ← PNGs gerados pelos notebooks
+│   ├── 04_epico3_funil.ipynb        ← Equipe de Dados
+│   ├── 05_epico4_paralelo.ipynb     ← Equipe de Dados
+│   └── 06_visualizacoes_plotly.ipynb ← ADS (opcional)
+├── graficos/                        ← PNGs gerados
 ├── docs/
-│   ├── fichamento_leis.docx         ← Secretariado
-│   ├── tabela_dado_lei.docx         ← Secretariado
-│   └── artigo_final.docx            ← Secretariado
+│   └── artigo_final.docx            ← Gabriel
 ├── powerbi/
-│   └── dashboard.pbix               ← Equipe de Dados
-├── BACKLOG_PROJETO.md               ← PO (Gabriel)
-└── GUIA_TAREFAS_EQUIPE.md           ← Este arquivo
+│   └── dashboard.pbix               ← ADS
+├── BACKLOG_PROJETO.md
+├── GUIA_TAREFAS_EQUIPE.md
+└── RESUMO_TRELLO.md
 ```

@@ -1,11 +1,14 @@
 # RESUMO PARA TRELLO — Projeto Acessibilidade Digital
-## Guia da Gerente de Projetos — Todas as tarefas, responsaveis e estrutura final
+## Todas as tarefas, responsaveis e estrutura final
+### v3 — Equipe de 4 pessoas · Foco nas Perguntas
 
 > **Projeto:** Acessibilidade Digital em Plataformas Educacionais  
 > **PO:** Gabriel (gaab-braga) | **Orientador:** Prof. Guilherme Bueno  
-> **Equipe:** 6 pessoas (Gabriel + 2 Secretariado + 2 Dados + 1 ADS)  
+> **Equipe:** 4 pessoas (Gabriel PO + 2 Dados + 1 ADS)  
 > **Entregas:** Toda quarta-feira as 20h  
 > **Documento de referencia:** BACKLOG_PROJETO.md + GUIA_TAREFAS_EQUIPE.md
+
+> ⚠️ **ATENCAO:** Este projeto trabalha com **Tabelas de Indicadores Agregados** do Cetic.br (arquivos XLSX com 69 abas cada), NAO com microdados CSV. Nao existem colunas derivadas, nao existe ML, nao existe cruzamento entre variaveis de abas diferentes.
 
 ---
 ---
@@ -21,9 +24,8 @@
 
 **Etiquetas de cor por equipe:**
 - AZUL = Equipe de Dados (2 pessoas)
-- ROXO = Equipe ADS (1 pessoa)
-- VERDE = Secretariado (2 pessoas)
-- AMARELO = Gabriel (PO)
+- ROXO = Equipe ADS (1 pessoa — Power BI / Visualizacao)
+- AMARELO = Gabriel (PO — redacao, validacao, leis)
 - VERMELHO = Todos (entrega coletiva)
 
 **Etiquetas de prioridade:**
@@ -33,323 +35,271 @@
 
 ---
 
-## SPRINT 1 — Fundacao (Semana 1)
+## SPRINT 1 — Extracao e Fundacao (Semana 1)
 
-### CARD 1 — Download e exploracao dos microdados
+### CARD 1 — Extracao e exploracao dos XLSX
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Baixar CSV do TIC Educacao 2024 (Modulo Escolas/Gestores) em cetic.br. Abrir em Jupyter Notebook, verificar separador, encoding, nomes das colunas. Enviar ao Gabriel: quantidade de linhas, separador, encoding e se colunas batem com o dicionario.
+- **Pergunta que responde:** Pre-requisito de TODAS as perguntas
+- **Descricao:** Abrir os 3 arquivos Excel (tabela_proporcao, tabela_total, dicionario) em Jupyter Notebook usando openpyxl/pandas. Listar todas as 69 abas. Verificar a estrutura padrao: ~29 linhas de segmentos por aba. Enviar ao Gabriel: lista de abas, confirmacao da estrutura, e os valores nacionais das abas-chave (D1A, D2, D3B, D4, D5, G4A, A1, B1).
 - **Checklist:**
-  - [ ] CSV baixado e salvo em dados/raw/
-  - [ ] Jupyter Notebook criado (01_limpeza.ipynb)
-  - [ ] Relatorio enviado ao Gabriel (linhas, colunas, encoding)
+  - [ ] 3 arquivos XLSX confirmados e acessiveis
+  - [ ] Notebook criado (01_extracao.ipynb)
+  - [ ] Lista completa de 69 abas documentada
+  - [ ] Estrutura padrao confirmada (~29 linhas × segmentos)
+  - [ ] Valores nacionais das abas-chave extraidos e enviados ao Gabriel
 - **Prazo:** Dia 1-2 da Sprint 1
-- **Conexao backlog:** Pre-requisito de TUDO
 
-### CARD 2 — Limpeza e tratamento do CSV
+### CARD 2 — Script de extracao padronizada das abas
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Tratar valores 97 (Nao sabe) e 98 (Nao respondeu) como NaN. Manter 99 (Nao se aplica) com tratamento caso a caso. Criar colunas derivadas: TEM_ACESSIBILIDADE, EXCLUSAO_ATIVA, EXCLUSAO_PCD. Exportar CSV limpo em dados/processed/.
+- **Pergunta que responde:** Pre-requisito de TODAS as perguntas
+- **Descricao:** Criar funcao `extrair_aba(arquivo, nome_aba)` que leia qualquer aba do XLSX e retorne um DataFrame padronizado com colunas nomeadas (Segmento, Sim, Nao, NS, NR, NSA, N). Extrair todas as abas relevantes (D1A, D2, D3A, D3B, D4, D5, G4, G4A, A1, A3_1, B1, B2, C1, K1_1). Exportar cada uma como CSV em dados/processed/.
 - **Checklist:**
-  - [ ] Valores 97 e 98 convertidos para NaN
-  - [ ] Coluna TEM_ACESSIBILIDADE criada (1 se P32_A/B/C/D = 1)
-  - [ ] Coluna EXCLUSAO_ATIVA criada (plataforma SIM + acessibilidade NAO)
-  - [ ] Coluna EXCLUSAO_PCD criada (PcD + plataforma + sem acessibilidade)
-  - [ ] Contagens de verificacao enviadas ao Gabriel
-  - [ ] CSV limpo salvo em dados/processed/
+  - [ ] Funcao extrair_aba() criada e testada
+  - [ ] Abas do modulo D extraidas (D1A, D2, D3A, D3B, D4, D5)
+  - [ ] Abas dos modulos G, A, B, C, K extraidas
+  - [ ] CSVs salvos em dados/processed/
+  - [ ] Validacao: percentuais extraidos conferem com os do XLSX original
+  - [ ] README criado em dados/ documentando cada CSV
 - **Prazo:** Dia 2-4 da Sprint 1
-- **Conexao backlog:** Secao 1 (Regras de ETL)
 
-### CARD 3 — Fichamento da Lei Brasileira de Inclusao (LBI)
-- **Responsavel:** Secretariado
-- **Etiqueta:** VERDE | MUST HAVE
-- **Descricao:** Ler e fichar os Art. 28 (incisos V, XI, XIV), Art. 63 e Art. 67 da Lei 13.146/2015. Para cada artigo: texto original, resumo com proprias palavras, e como usaremos no projeto. Formato: Word ou Google Docs.
-- **Checklist:**
-  - [ ] Art. 28, V fichado (recursos de TI acessiveis)
-  - [ ] Art. 28, XI fichado (formacao de professores)
-  - [ ] Art. 28, XIV fichado (oferta de TI assistiva)
-  - [ ] Art. 63 fichado (acessibilidade em sites)
-  - [ ] Art. 67 fichado (acessibilidade em comunicacoes)
-- **Prazo:** Quarta-feira da Semana 1
-- **Conexao backlog:** Alimenta TODOS os Epicos
-
-### CARD 4 — Fichamento do Decreto 5.296/2004
-- **Responsavel:** Secretariado
-- **Etiqueta:** VERDE | MUST HAVE
-- **Descricao:** Ler e fichar o Art. 47 (acessibilidade em portais e sitios eletronicos). Mesmo formato do fichamento da LBI.
-- **Checklist:**
-  - [ ] Art. 47 fichado
-  - [ ] Documento salvo em docs/fichamento_leis.docx
-- **Prazo:** Quarta-feira da Semana 1
-- **Conexao backlog:** US-4.1 (Funil de Digitalizacao)
-
-### CARD 5 — Fichamento da Portaria MEC 3.284/2003
-- **Responsavel:** Secretariado
-- **Etiqueta:** VERDE | SHOULD HAVE
-- **Descricao:** Pesquisar e fichar os requisitos de acessibilidade para credenciamento de instituicoes de ensino. Mesmo formato.
-- **Checklist:**
-  - [ ] Portaria localizada e fichada
-  - [ ] Documento atualizado em docs/fichamento_leis.docx
-- **Prazo:** Quarta-feira da Semana 1
-- **Conexao backlog:** Legislacao complementar
-
-### CARD 6 — Fichamento do e-MAG
-- **Responsavel:** Secretariado
-- **Etiqueta:** VERDE | SHOULD HAVE
-- **Descricao:** Acessar gov.br/governodigital e ler recomendacoes de acessibilidade. Anotar quais sao aplicaveis a plataformas educacionais (Google Classroom, Moodle, etc.).
-- **Checklist:**
-  - [ ] e-MAG lido
-  - [ ] Recomendacoes aplicaveis listadas
-  - [ ] Documento atualizado
-- **Prazo:** Quarta-feira da Semana 1
-- **Conexao backlog:** Referencia para todos os Epicos
-
-### CARD 7 — Validacao da limpeza (PO)
+### CARD 3 — Validacao da extracao (PO)
 - **Responsavel:** Gabriel
 - **Etiqueta:** AMARELO | MUST HAVE
-- **Descricao:** Receber os numeros da equipe de dados (total escolas, escolas com internet, com plataforma, com acessibilidade, exclusao ativa, escolas com PcD, exclusao PcD). Validar se estao coerentes com o esperado. Dar GO para Sprint 2.
+- **Descricao:** Receber os valores nacionais extraidos pela equipe de dados e conferir com os valores de referencia do backlog:
+  - G4A = 73,8% (plataformas)
+  - D2 Hardware = 19,6% · Software = 15,9% · Aulas = 12,0% · Materiais = 34,0%
+  - D1A = 81,4% (escolas com PcD)
+  - D3B = 43,5% · D4 = 41,2% · D5 = 35,1% (funil sala de recursos)
+  - A1 = 95,9% (Internet) · B1 = 88,7% (computador)
+  Validar se estao coerentes. Dar GO para Sprint 2.
 - **Checklist:**
-  - [ ] Numeros recebidos e conferidos
+  - [ ] Valores nacionais conferidos
+  - [ ] CSVs processados verificados (amostra)
   - [ ] GO comunicado no grupo
 - **Prazo:** Fim da Semana 1
-- **Conexao backlog:** Gate de qualidade
+
+### CARD 4 — Pesquisa bibliografica: legislacao (PO)
+- **Responsavel:** Gabriel
+- **Etiqueta:** AMARELO | MUST HAVE
+- **Descricao:** Pesquisar e documentar os artigos de lei que serao citados no artigo final. NAO e fichamento extenso — e coleta direta dos artigos para citacao na redacao. Leis: LBI 13.146/2015 (Art. 28, 63, 67), Decreto 5.296/2004 (Art. 47), Portaria MEC 3.284/2003, Modelo e-MAG.
+- **Checklist:**
+  - [ ] Art. 28 LBI localizado (incisos V, XI, XIV)
+  - [ ] Art. 63 LBI localizado
+  - [ ] Art. 67 LBI localizado
+  - [ ] Art. 47 Decreto 5.296 localizado
+  - [ ] e-MAG consultado
+  - [ ] Anotacoes salvas para uso na redacao
+- **Prazo:** Semana 1
+- **Conexao backlog:** Alimenta a Discussao (Cap. 5) e Referencial Teorico (Cap. 2)
 
 ---
 
-## SPRINT 2 — Analises Principais (Semana 2)
+## SPRINT 2 — Analises MUST HAVE (Semana 2)
 
-### CARD 8 — US-1.1: Grafico Plataformas vs. Acessibilidade
+### CARD 5 — P1 (US-1.1): Panorama Nacional — Digitalizacao vs. Acessibilidade
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Calcular % ponderado de escolas com plataformas (P42_2_AGREG=1) vs. % com acessibilidade (TEM_ACESSIBILIDADE=1). Gerar grafico de barras comparativo. USAR PESO. Mostrar n bruto.
-- **Entrega:** grafico_US1_1.png
-- **Notebook:** 02_epico1_ilusao.ipynb
-- **Conexao backlog:** US-1.1 — Epico 1
+- **Pergunta:** "Qual o gap entre digitalizacao e acessibilidade no nivel nacional?"
+- **Descricao:** Grafico de barras com 5 barras: G4A = 73,8% (plataformas) ao lado de D2 Hardware = 19,6%, Software = 15,9%, Aulas = 12,0%, Materiais = 34,0%. Incluir nota metodologica: "Indicadores de abas diferentes — comparacao contextual, nao cruzamento".
+- **Entrega:** graficos/US1_1_panorama.png
+- **Notebook:** 02_epico1_retrato.ipynb
+- **Resposta esperada:** "73,8% das escolas usam plataformas, mas o recurso assistivo mais presente (materiais) atinge apenas 34%. Aulas assistivas: 12%."
 
-### CARD 9 — US-1.2: KPI Exclusao Ativa (Donut)
+### CARD 6 — P2 (US-1.2): Heatmap Completo D2 — 4 Recursos × Todos os Segmentos
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Filtrar escolas com plataformas. Calcular % SEM nenhum recurso assistivo (ponderado). Gerar grafico donut. ESTE E O NUMERO MAIS IMPORTANTE DO PROJETO.
-- **Entrega:** grafico_US1_2_KPI.png
-- **Notebook:** 02_epico1_ilusao.ipynb
-- **Conexao backlog:** US-1.2 — Epico 1
+- **Pergunta:** "Qual a adocao de acessibilidade por segmento? Onde estao os piores gaps?"
+- **Descricao:** Extrair TODAS as 29 linhas da aba D2 (proporcao), coluna "Sim" de cada recurso. Gerar heatmap com seaborn: eixo Y = segmentos, eixo X = 4 recursos. ANALISE MAIS RICA DO PROJETO. Destacar: Porte ate 50 = 0,3% aulas (gap 83x vs. 1000+); Rural = 2,6x a 4,1x menor.
+- **Entrega:** graficos/US1_2_heatmap_D2.png + tabela CSV
+- **Notebook:** 02_epico1_retrato.ipynb
+- **Resposta esperada:** "Centro-Oeste lidera tudo. Gaps brutais: Rural 3,2x menos hardware; Porte ate 50 tem 0,3% aulas (83x menos que 1000+)."
 
-### CARD 10 — US-1.5: Escolas com PcD + Plataforma sem Acessibilidade
+### CARD 7 — P3 (US-1.3): Escolas com Alunos PcD — Panorama (D1A)
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Filtrar escolas com P31=1 (tem PcD) E P42_2_AGREG=1 (usa plataforma). Calcular % sem nenhum recurso assistivo. PERCENTUAL DE MAIOR IMPACTO ACADEMICO. Enviar resultado imediatamente ao Secretariado para confrontar com Art. 28 da LBI.
-- **Entrega:** Percentual + print do calculo
-- **Notebook:** 02_epico1_ilusao.ipynb
-- **Conexao backlog:** US-1.5 — Epico 1
+- **Pergunta:** "Quantas escolas atendem alunos com deficiencia?"
+- **Descricao:** Extrair aba D1A (proporcao), gerar grafico de barras por segmento. Nacional = 81,4%. Destacar: Rural 65% vs Urbana 90,6%; Porte ate 50 = 39,6% vs 1000+ = 99%.
+- **Entrega:** graficos/US1_3_D1A_pcd.png
+- **Notebook:** 02_epico1_retrato.ipynb
+- **Resposta esperada:** "81,4% das escolas tem alunos PcD. Rural: 65%, Porte ate 50: 39,6%. Contextualiza 'Nao se aplica' de D2."
 
-### CARD 11 — US-1.3: Detalhamento por tipo de recurso assistivo
-- **Responsavel:** Equipe de Dados
-- **Etiqueta:** AZUL | SHOULD HAVE
-- **Descricao:** Calcular taxa de adocao de CADA recurso individualmente (P32_A hardware, P32_B software, P32_C aulas, P32_D materiais) entre escolas com plataformas. Grafico de barras horizontais.
-- **Entrega:** grafico_US1_3.png
-- **Notebook:** 02_epico1_ilusao.ipynb
-- **Conexao backlog:** US-1.3 — Epico 1
-
-### CARD 12 — US-2.1: Acessibilidade por Dependencia Administrativa
+### CARD 8 — P4 (US-2.2): Acessibilidade por Regiao — Centro-Oeste em Destaque
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Calcular % com acessibilidade segmentado por COD_DEPENDENCIA (Federal, Estadual, Municipal, Particular). Grafico de barras agrupadas. Ponderado por PESO.
-- **Entrega:** grafico_US2_1.png
+- **Pergunta:** "Centro-Oeste realmente lidera? Quem sao os excluidos regionais?"
+- **Descricao:** Da aba D2 (proporcao), extrair linhas de REGIAO. Barras agrupadas (5 regioes × 4 recursos) com linha de media nacional. Centro-Oeste LIDERA TODOS os recursos. Norte e Nordeste excluidos.
+- **Entrega:** graficos/US2_2_regioes.png
 - **Notebook:** 03_epico2_abismo.ipynb
-- **Conexao backlog:** US-2.1 — Epico 2
+- **Resposta esperada:** "Centro-Oeste lidera: Hardware 31,8%, Materiais 53,5%. Nordeste mais excluido (Hardware 11,1%, Aulas 4,7%)."
 
-### CARD 13 — US-2.2: Centro-Oeste vs. Media Nacional
+### CARD 9 — P5 (US-2.3): O Abismo Urbano-Rural
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Calcular % com acessibilidade por COD_REGIAO, com destaque para Centro-Oeste (COD_REGIAO=5). Grafico de barras com linha de referencia na media nacional.
-- **Entrega:** grafico_US2_2.png
+- **Pergunta:** "Qual a desigualdade entre escolas urbanas e rurais?"
+- **Descricao:** Da aba D2, extrair linhas AREA (Urbana/Rural). Grafico comparativo com 2 barras por recurso. Gaps: Hardware 3,2x · Software 3,6x · Aulas 4,1x · Materiais 2,6x.
+- **Entrega:** graficos/US2_3_urbano_rural.png
 - **Notebook:** 03_epico2_abismo.ipynb
-- **Conexao backlog:** US-2.2 — Epico 2
+- **Resposta esperada:** "Gaps de 2,6x (materiais) a 4,1x (aulas). Rural: aulas assistivas em apenas 4%."
 
-### CARD 14 — US-2.4: Urbana vs. Rural
-- **Responsavel:** Equipe de Dados
-- **Etiqueta:** AZUL | SHOULD HAVE
-- **Descricao:** Calcular diferenca percentual de acessibilidade entre COD_ZONA=1 (urbana) e COD_ZONA=2 (rural). Grafico comparativo com 2 barras por recurso.
-- **Entrega:** grafico_US2_4.png
-- **Notebook:** 03_epico2_abismo.ipynb
-- **Conexao backlog:** US-2.4 — Epico 2
-
-### CARD 15 — US-2.7: Funil da Sala de Recursos Multifuncionais
-- **Responsavel:** Equipe de Dados
-- **Etiqueta:** AZUL | SHOULD HAVE
-- **Descricao:** Funil de 3 estagios: Tem Sala (P24_G=1) -> Tem Internet na sala (P25_G=1) -> Aluno acessa Internet (P26_G=1). Excelente para storytelling visual. Enviar ao Secretariado para vincular com Art. 67 da LBI.
-- **Entrega:** grafico_US2_7_funil.png
-- **Notebook:** 03_epico2_abismo.ipynb
-- **Conexao backlog:** US-2.7 — Epico 2
-
-### CARD 16 — US-4.1: Funil de Digitalizacao Inclusiva (Nacional)
+### CARD 10 — P6 (US-3.1): Funil da Sala de Recursos (D3B → D4 → D5)
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Funil de 5 estagios: Internet -> +Computador -> +Plataforma -> +Acessibilidade -> +Sala AEE com Internet. MELHOR VISUALIZACAO DO PROJETO. Ponderado por PESO.
-- **Entrega:** grafico_US4_1_funil_completo.png
-- **Notebook:** 04_epico4_funil.ipynb
-- **Conexao backlog:** US-4.1 — Epico 4
+- **Pergunta:** "O funil da Sala de Recursos — quanta perda entre ter a sala e o aluno acessar?"
+- **Descricao:** Extrair abas D3B (43,5%), D4 (41,2%), D5 (35,1%) — todas com mesma base amostral (escolas com Internet). Gerar FUNNEL CHART de 3 estagios: Tem Sala → Internet na Sala → Aluno Acessa. UNICO FUNIL LEGITIMO DO PROJETO.
+- **Entrega:** graficos/US3_1_funil_sala.png
+- **Notebook:** 04_epico3_funil.ipynb
+- **Resposta esperada:** "43,5% tem Sala → 41,2% com Internet na Sala → 35,1% onde aluno acessa. Perda de 8,4 pp. ~20% perdem o aluno entre ter e acessar."
 
-### CARD 17 — Tabela "Dado -> Argumento Juridico"
-- **Responsavel:** Secretariado
-- **Etiqueta:** VERDE | MUST HAVE
-- **Descricao:** Receber graficos e percentuais da Equipe de Dados. Criar tabela com 3 colunas: Dado estatistico | Argumento juridico | Lei citada. Minimo 6 linhas (uma por analise MUST HAVE).
-- **Checklist:**
-  - [ ] Receber todos os graficos MUST HAVE
-  - [ ] Escrever argumento para US-1.1 (Art. 63 LBI)
-  - [ ] Escrever argumento para US-1.2 (Art. 63 LBI)
-  - [ ] Escrever argumento para US-1.5 (Art. 28 V e XIV LBI)
-  - [ ] Escrever argumento para US-2.1 (Art. 28 LBI)
-  - [ ] Escrever argumento para US-2.2 (Art. 28 LBI)
-  - [ ] Escrever argumento para US-4.1 (Art. 63 LBI + Decreto 5.296)
-- **Prazo:** Uma semana apos receber graficos
-- **Conexao backlog:** Epicos 1, 2 e 4
-
-### CARD 18 — Preparar base para modelagem
+### CARD 11 — ADS: Estrutura inicial do Power BI
 - **Responsavel:** ADS
 - **Etiqueta:** ROXO | SHOULD HAVE
-- **Descricao:** Receber DataFrame limpo da Equipe de Dados. Criar variavel Y_SEM_ACESSIBILIDADE (binaria). Selecionar 10 preditores (COD_ZONA, PORTE, COD_DEPENDENCIA, COD_REGIAO, COD_TIPO_CIDADE, NIVEL_ENSINO, P8, P10_AGREG, P59_P73_AGREG, P42_2_AGREG). Fazer one-hot encoding das categoricas. Registrar % de linhas validas.
+- **Descricao:** Receber os CSVs processados da equipe de dados. Importar no Power BI Desktop. Criar modelo de dados com tabelas separadas por aba. Configurar relacionamentos (coluna "Segmento" como chave). Criar pagina inicial com KPIs nacionais (G4A, D2 × 4 recursos, D1A).
 - **Checklist:**
-  - [ ] DataFrame recebido da equipe de dados
-  - [ ] Y criado corretamente
-  - [ ] Preditores selecionados
-  - [ ] One-hot encoding feito
-  - [ ] Base exportada sem NaN nos preditores
-- **Notebook:** 05_regressao_logistica.ipynb
-- **Conexao backlog:** US-3.1 — Epico 3
+  - [ ] CSVs importados no Power BI
+  - [ ] Modelo de dados configurado
+  - [ ] Pagina de KPIs nacionais criada
+  - [ ] Filtro por segmento funcionando
+- **Notebook:** N/A — Power BI Desktop
 
 ---
 
-## SPRINT 3 — Modelos e Complementos (Semana 3)
+## SPRINT 3 — Analises SHOULD + COULD HAVE (Semana 3)
 
-### CARD 19 — US-3.1: Regressao Logistica
-- **Responsavel:** ADS
-- **Etiqueta:** ROXO | SHOULD HAVE
-- **Descricao:** Treinar regressao logistica (sklearn ou statsmodels) com sample_weight=PESO. Split 70/30 estratificado. Gerar: classification_report, AUC-ROC, tabela de Odds Ratio, grafico de importancia das features. Se AUC < 0.55, reportar ao Gabriel (isso tambem e um achado valido).
-- **Entrega:** grafico_US3_1_odds_ratio.png + metricas
-- **Notebook:** 05_regressao_logistica.ipynb
-- **Conexao backlog:** US-3.1 — Epico 3
-
-### CARD 20 — US-3.3: Arvore de Decisao
-- **Responsavel:** ADS
-- **Etiqueta:** ROXO | COULD HAVE
-- **Descricao:** Treinar DecisionTreeClassifier (max_depth=4, min_samples_leaf=30). Visualizar com plot_tree. A arvore mostra uma "receita" visual: ex. "Se municipal + rural + sem internet = 95% sem acessibilidade". Muito poderoso na apresentacao.
-- **Entrega:** grafico_US3_3_arvore.png
-- **Notebook:** 06_arvore_decisao.ipynb
-- **Conexao backlog:** US-3.3 — Epico 3
-
-### CARD 21 — US-3.2: Perfil da Escola Excluida
-- **Responsavel:** ADS + Equipe de Dados
-- **Etiqueta:** ROXO + AZUL | COULD HAVE
-- **Descricao:** Filtrar escolas com EXCLUSAO_ATIVA=1. Comparar perfil (% rural, % municipal, % NE, etc.) com escolas incluidas. Tabela de frequencias — Retrato da exclusao.
-- **Entrega:** Tabela comparativa
-- **Notebook:** 06_arvore_decisao.ipynb
-- **Conexao backlog:** US-3.2 — Epico 3
-
-### CARD 22 — US-4.3: Formacao do Gestor como Fator
+### CARD 12 — P7 (US-2.1): Acessibilidade por Dependencia Administrativa
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | SHOULD HAVE
-- **Descricao:** Comparar taxa de acessibilidade entre escolas com gestor com formacao TIC (P59_P73_AGREG=1) vs. sem. Grafico comparativo. Insight para recomendacao de politica publica.
-- **Entrega:** grafico_US4_3.png
-- **Notebook:** 04_epico4_funil.ipynb
-- **Conexao backlog:** US-4.3 — Epico 4
+- **Pergunta:** "Municipal vs. Estadual vs. Particular — quem oferece mais?"
+- **Descricao:** Da aba D2, extrair linhas DEPENDENCIA. Barras agrupadas (3 dep. × 4 recursos). Insight: Particulares tem MENOS hardware (12,6%) que estaduais (26,5%), mas MAIS materiais digitais (43,4%).
+- **Entrega:** graficos/US2_1_dependencia.png
+- **Notebook:** 03_epico2_abismo.ipynb
 
-### CARD 23 — US-4.2: Velocidade de Internet e Acessibilidade
+### CARD 13 — P8 (US-2.5): Acessibilidade por Porte — Gap mais dramatico
+- **Responsavel:** Equipe de Dados
+- **Etiqueta:** AZUL | SHOULD HAVE
+- **Pergunta:** "O tamanho da escola importa? Qual o gap por porte?"
+- **Descricao:** Da aba D2, extrair linhas PORTE (6 faixas). ACHADO MAIS DRAMATICO: Porte ate 50 = 0,3% aulas vs 1000+ = 25% → gap de 83 VEZES. Hardware: 2,2% vs 53,7% → gap de 24x.
+- **Entrega:** graficos/US2_5_porte.png
+- **Notebook:** 03_epico2_abismo.ipynb
+
+### CARD 14 — P9 (US-2.7): Infraestrutura como Pre-condicao (Internet+PC vs. sem)
+- **Responsavel:** Equipe de Dados
+- **Etiqueta:** AZUL | SHOULD HAVE
+- **Pergunta:** "Internet+Computador e pre-condicao para acessibilidade?"
+- **Descricao:** Da aba D2, extrair linhas ESCOLA COM INTERNET E COMPUTADOR (Sim/Nao). Gaps: Hardware 31,7% vs 2,3% (13,8x) · Aulas 20% vs 0,6% (33,3x).
+- **Entrega:** graficos/US2_7_infra_precondicao.png
+- **Notebook:** 03_epico2_abismo.ipynb
+
+### CARD 15 — P10 (US-4.1): Escadaria da Exclusao — Indicadores Paralelos
+- **Responsavel:** Equipe de Dados
+- **Etiqueta:** AZUL | SHOULD HAVE
+- **Pergunta:** "Todos os indicadores lado a lado — onde a 'escada' desce?"
+- **Descricao:** Barras descendentes: A1=95,9% → B1=88,7% → G4A=73,8% → D1A=81,4% → D2 Materiais=34% → D2 Hardware=19,6% → D2 Software=15,9% → D2 Aulas=12%. Nota: "Cada barra vem de aba diferente — contexto paralelo, nao cumulativo".
+- **Entrega:** graficos/US4_1_escadaria.png
+- **Notebook:** 05_epico4_paralelo.ipynb
+
+### CARD 16 — P11 (US-1.5): Analise do "Nao se Aplica" em D2
+- **Responsavel:** Equipe de Dados
+- **Etiqueta:** AZUL | SHOULD HAVE
+- **Pergunta:** "Quantas escolas nem sao perguntadas sobre acessibilidade?"
+- **Descricao:** D2 coluna "Nao se aplica" por segmento. Nacional = 12,8%. Rural = 35,2%. Porte ate 50 = 38,2%. NOTA METODOLOGICA OBRIGATORIA para o artigo.
+- **Entrega:** graficos/US1_5_nsa.png + paragrafo explicativo
+- **Notebook:** 02_epico1_retrato.ipynb
+
+### CARD 17 — P12 (US-1.4): Plataformas Especificas por Segmento (G4)
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | COULD HAVE
-- **Descricao:** Verificar se escolas com maior velocidade (P76) tendem a ter mais recursos assistivos. Barras por faixa de velocidade.
-- **Entrega:** grafico_US4_2.png
-- **Conexao backlog:** US-4.2 — Epico 4
+- **Pergunta:** "Quais plataformas dominam? Google e monopolista?"
+- **Descricao:** Da aba G4, uso de cada plataforma por segmento. Google (Classroom+Meet) = 59,4%. Relevante para argumentacao sobre acessibilidade de plataforma dominante.
+- **Entrega:** graficos/US1_4_plataformas.png
 
-### CARD 24 — US-1.4: Plataforma especifica vs. Acessibilidade
+### CARD 18 — P13-P19: Analises complementares de contexto
 - **Responsavel:** Equipe de Dados
 - **Etiqueta:** AZUL | COULD HAVE
-- **Descricao:** Cruzar cada plataforma (Teams, Zoom, Classroom, Moodle, Meet, AVAMEC) com % de acessibilidade. Heatmap ou tabela cruzada. Atencao: n amostral por plataforma pode ser pequeno.
-- **Entrega:** tabela_US1_4.png
-- **Conexao backlog:** US-1.4 — Epico 1
+- **Descricao:** US-2.4 Capital vs Interior, US-2.6 Nivel de Ensino, US-3.2 Funil por Segmento, US-4.2 Gap Internet→Acessibilidade, US-4.3 Google por segmento, US-5.1 a US-5.5 Infraestrutura. Servem para contextualizar os resultados no artigo.
+- **Entrega:** CSVs + graficos de suporte
 
-### CARD 25 — US-2.3: Dupla segmentacao Regiao x Dependencia
-- **Responsavel:** Equipe de Dados
-- **Etiqueta:** AZUL | COULD HAVE
-- **Descricao:** Tabela pivot 5 regioes x 2 categorias (Publica/Privada). Destaque para Centro-Oeste. Atencao: subgrupos podem ficar pequenos.
-- **Entrega:** tabela_US2_3.png
-- **Conexao backlog:** US-2.3 — Epico 2
-
-### CARD 26 — US-2.5: Capital vs. Interior
-- **Responsavel:** Equipe de Dados
-- **Etiqueta:** AZUL | COULD HAVE
-- **Descricao:** Comparar COD_TIPO_CIDADE=1 (Capital) vs. 2 (Interior) em acessibilidade. Cruzar com dependencia administrativa. Tabela cruzada.
-- **Entrega:** tabela_US2_5.png
-- **Conexao backlog:** US-2.5 — Epico 2
-
-### CARD 27 — US-2.6: Acessibilidade por Porte
-- **Responsavel:** Equipe de Dados
-- **Etiqueta:** AZUL | COULD HAVE
-- **Descricao:** Barras empilhadas com % de acessibilidade por 6 faixas de porte (PORTE).
-- **Entrega:** grafico_US2_6.png
-- **Conexao backlog:** US-2.6 — Epico 2
-
-### CARD 28 — Redacao parcial (Metodologia + Resultados)
-- **Responsavel:** Secretariado
-- **Etiqueta:** VERDE | MUST HAVE
-- **Descricao:** Comecar a redigir o capitulo de Metodologia (Gabriel fornece texto tecnico sobre a base TIC Educacao) e o capitulo de Resultados (cada grafico + interpretacao juridica da Tabela Dado->Lei).
-- **Prazo:** Semana 3
-- **Conexao backlog:** Sprint 4 (Consolidacao)
+### CARD 19 — ADS: Power BI com Heatmap e Escadaria
+- **Responsavel:** ADS
+- **Etiqueta:** ROXO | SHOULD HAVE
+- **Descricao:** Adicionar ao dashboard: pagina do Heatmap D2, pagina do Funil, pagina da Escadaria. Usar dados dos novos graficos gerados pela equipe de dados.
+- **Checklist:**
+  - [ ] Pagina Heatmap D2 adicionada
+  - [ ] Pagina Funil adicionada
+  - [ ] Pagina Escadaria adicionada
+  - [ ] Filtros globais testados
 
 ---
 
 ## SPRINT 4 — Consolidacao e Entrega Final (Semana 4)
 
-### CARD 29 — Dashboard Power BI
-- **Responsavel:** Equipe de Dados
-- **Etiqueta:** AZUL | MUST HAVE
-- **Descricao:** Compilar os graficos principais em um dashboard interativo no Power BI. Incluir: KPI de exclusao, funil de digitalizacao, comparativos por regiao e dependencia. Exportar como powerbi/dashboard.pbix.
+### CARD 20 — Dashboard Power BI (Final)
+- **Responsavel:** ADS
+- **Etiqueta:** ROXO | MUST HAVE
+- **Descricao:** Finalizar o dashboard interativo no Power BI com todas as analises:
+  - Pagina 1: KPIs nacionais (G4A 73,8%, D2 × 4 recursos, D1A 81,4%)
+  - Pagina 2: Heatmap D2 (segmentos × recursos)
+  - Pagina 3: Funil da Sala de Recursos (D3B→D4→D5)
+  - Pagina 4: Escadaria da Exclusao
+  - Filtros globais: Regiao, Area, Dependencia, Porte
 - **Checklist:**
-  - [ ] KPI central (exclusao ativa %) em destaque
-  - [ ] Funil de 5 estagios
-  - [ ] Filtros por regiao e dependencia
-  - [ ] Todos percentuais ponderados por PESO
-- **Conexao backlog:** Todos os Epicos
+  - [ ] Pagina 1 — KPIs nacionais
+  - [ ] Pagina 2 — Heatmap desigualdades
+  - [ ] Pagina 3 — Funil Sala de Recursos
+  - [ ] Pagina 4 — Escadaria paralela
+  - [ ] Filtros interativos funcionando
+  - [ ] Exportado como powerbi/dashboard_acessibilidade.pbix
 
-### CARD 30 — Texto final ABNT + Slides
-- **Responsavel:** Secretariado
-- **Etiqueta:** VERDE | MUST HAVE
-- **Descricao:** Finalizar o artigo completo em ABNT: Introducao, Referencial Teorico, Metodologia, Resultados, Conclusao. Montar slides da apresentacao (PowerPoint ou Google Slides). Incluir todos os graficos e a argumentacao juridica.
+### CARD 21 — Artigo final ABNT (PO)
+- **Responsavel:** Gabriel
+- **Etiqueta:** AMARELO | MUST HAVE
+- **Descricao:** Redigir o artigo completo em ABNT usando os graficos e respostas das perguntas:
+  - Introducao (contexto + dado-gancho)
+  - Referencial Teorico (leis pesquisadas no Card 4)
+  - Metodologia (tabelas de indicadores + limitacoes)
+  - Resultados (graficos + resposta de cada pergunta)
+  - Discussao (dados vs. leis — tabela Dado→Lei)
+  - Conclusao + Recomendacoes de politica publica
+  Declarar explicitamente na Metodologia que sao tabelas de indicadores (nao microdados) e listar limitacoes.
 - **Checklist:**
   - [ ] Introducao escrita
-  - [ ] Referencial Teorico (fichamentos integrados)
-  - [ ] Metodologia (base + tratamento + limitacoes)
-  - [ ] Resultados (graficos + interpretacao juridica)
-  - [ ] Conclusao + Recomendacoes
+  - [ ] Referencial Teorico (legislacao integrada)
+  - [ ] Metodologia (tabelas de indicadores + limitacoes + sem ML + sem cruzamento)
+  - [ ] Resultados (graficos + interpretacao)
+  - [ ] Discussao (dados vs. leis com numeros reais)
+  - [ ] Conclusao + 4 Recomendacoes de politica publica
   - [ ] Formatacao ABNT (fonte, margens, citacoes, referencias)
-  - [ ] Slides prontos
-- **Entrega:** docs/artigo_final.docx + slides
-- **Conexao backlog:** Consolidacao final
+- **Entrega:** docs/artigo_final.docx
+- **Prazo:** Semana 4
 
-### CARD 31 — Revisao final e ensaio da apresentacao
+### CARD 22 — Slides da apresentacao (PO)
+- **Responsavel:** Gabriel
+- **Etiqueta:** AMARELO | MUST HAVE
+- **Descricao:** Montar slides seguindo a narrativa do projeto (ver roteiro na Parte 2). Incluir TODOS os graficos MUST HAVE + Escadaria + Funil. Ultimo slide com as 4 recomendacoes.
+- **Entrega:** docs/slides_apresentacao.pptx
+- **Prazo:** Semana 4
+
+### CARD 23 — Revisao final e ensaio
 - **Responsavel:** TODOS
 - **Etiqueta:** VERMELHO | MUST HAVE
-- **Descricao:** Revisao coletiva do artigo + slides. Ensaio da apresentacao oral. Verificar se todos os numeros estao corretos e se o storytelling faz sentido.
+- **Descricao:** Revisao coletiva do artigo + slides + dashboard. Ensaio da apresentacao oral. Verificar numeros, notas metodologicas, storytelling.
 - **Checklist:**
-  - [ ] Revisao cruzada: Dados confere numeros, Secretariado confere texto
+  - [ ] Dados confere numeros nos graficos
+  - [ ] Gabriel confere texto e argumentacao
+  - [ ] ADS confere dashboard e filtros
   - [ ] Ensaio cronometrado
+  - [ ] Todas as notas metodologicas presentes
   - [ ] Versao final commitada no GitHub
-- **Conexao backlog:** Entrega final
 
 ---
 
 ## TAREFAS CONTINUAS (sem sprint fixo)
 
-### CARD 32 — Controle de cronograma semanal
-- **Responsavel:** Secretariado
-- **Etiqueta:** VERDE | MUST HAVE
-- **Descricao:** Manter planilha com status de cada equipe. Enviar print ao Gabriel toda quarta antes das 18h.
-- **Frequencia:** Semanal continuo
-
-### CARD 33 — Validacao de resultados intermediarios
+### CARD 24 — Validacao de resultados intermediarios
 - **Responsavel:** Gabriel
 - **Etiqueta:** AMARELO | MUST HAVE
-- **Descricao:** Receber e validar cada entrega antes de prosseguir. Dar GO/NO-GO para proxima etapa.
+- **Descricao:** Receber e validar cada entrega antes de prosseguir. Conferir valores com os numeros de referencia do Backlog. Dar GO/NO-GO para proxima etapa.
 - **Frequencia:** A cada entrega de sprint
 
 ---
@@ -360,14 +310,16 @@
 ## A Logica da Narrativa
 
 O arquivo final (artigo + apresentacao) precisa contar uma HISTORIA com os dados.
-A ordem abaixo segue o raciocinio:
+A ordem segue o raciocinio:
 
 ```
-CONTEXTO -> PROBLEMA -> METODO -> DESCOBERTAS -> LEIS -> PREVISAO -> CONCLUSAO
-   "O que     "Do que     "Como     "O que os     "O que    "E no       "O que
-    esta     estamos    fizemos?"   dados        a lei     futuro?"    devemos
-  acontecendo?"  falando?"            dizem?"     diz?"                 fazer?"
+CONTEXTO → PROBLEMA → METODO → DESCOBERTAS → LEIS → CONCLUSAO
+  "O que      "Do que     "Como     "O que os     "O que     "O que
+   esta      estamos    fizemos?"   dados        a lei      devemos
+ acontecendo?" falando?"             dizem?"     diz?"      fazer?"
 ```
+
+> ⚠️ **NAO existe "Previsao/Modelagem"** nesta narrativa — sem microdados, nao ha ML.
 
 ---
 
@@ -378,10 +330,11 @@ CONTEXTO -> PROBLEMA -> METODO -> DESCOBERTAS -> LEIS -> PREVISAO -> CONCLUSAO
 
 | Conteudo | Responsavel | Fonte |
 |---|---|---|
-| Contexto da digitalizacao acelerada pos-pandemia | Secretariado | Pesquisa bibliografica |
+| Contexto da digitalizacao acelerada pos-pandemia | Gabriel | Pesquisa bibliografica |
 | Apresentacao da pesquisa TIC Educacao 2024 | Gabriel | Cetic.br |
-| A pergunta central: plataformas digitais vieram acompanhadas de acessibilidade? | Secretariado | BACKLOG (hipotese geral) |
-| Justificativa: Educacao Inclusiva como tema obrigatorio do projeto de extensao | Secretariado | Regulamento da disciplina |
+| Dado-gancho: 73,8% das escolas usam plataformas digitais — mas apenas 12% possuem aulas de informatica assistiva | Gabriel | G4A + D2 |
+| A pergunta central: a inclusao digital acompanhou a digitalizacao? | Gabriel | BACKLOG (hipotese geral) |
+| Justificativa: Educacao Inclusiva como tema do projeto de extensao | Gabriel | Regulamento da disciplina |
 
 **Impacto narrativo:** O leitor entende POR QUE estamos fazendo essa pesquisa.
 
@@ -392,13 +345,13 @@ CONTEXTO -> PROBLEMA -> METODO -> DESCOBERTAS -> LEIS -> PREVISAO -> CONCLUSAO
 
 | Conteudo | Responsavel | Fonte |
 |---|---|---|
-| Lei Brasileira de Inclusao (13.146/2015) — Art. 28, 63, 67 | Secretariado | Fichamento (Card 3) |
-| Decreto 5.296/2004 — Art. 47 | Secretariado | Fichamento (Card 4) |
-| Portaria MEC 3.284/2003 | Secretariado | Fichamento (Card 5) |
-| Modelo e-MAG | Secretariado | Fichamento (Card 6) |
-| Conceitos: Tecnologia assistiva, Desenho Universal, Inclusao digital | Secretariado | Pesquisa bibliografica |
+| Lei Brasileira de Inclusao (13.146/2015) — Art. 28, 63, 67 | Gabriel | Card 4 |
+| Decreto 5.296/2004 — Art. 47 | Gabriel | Card 4 |
+| Portaria MEC 3.284/2003 | Gabriel | Card 4 |
+| Modelo e-MAG | Gabriel | Card 4 |
+| Conceitos: Tecnologia assistiva, Desenho Universal, Inclusao digital | Gabriel | Pesquisa bibliografica |
 
-**Impacto narrativo:** O leitor agora sabe que NAO e opcional — a lei OBRIGA acessibilidade. Isso cria expectativa: "Sera que as escolas estao cumprindo?"
+**Impacto narrativo:** O leitor agora sabe que NAO e opcional — a lei OBRIGA acessibilidade.
 
 ---
 
@@ -408,98 +361,71 @@ CONTEXTO -> PROBLEMA -> METODO -> DESCOBERTAS -> LEIS -> PREVISAO -> CONCLUSAO
 | Conteudo | Responsavel | Fonte |
 |---|---|---|
 | Descricao da base TIC Educacao 2024 (Cetic.br, modulo Gestores, amostra nacional) | Gabriel | Documentacao Cetic.br |
-| Variaveis utilizadas (tabela com as 4 categorias do inventario) | Gabriel | Backlog Secao 0 |
-| Regras de tratamento: 97/98->NaN, 99 contextual, PESO obrigatorio | Equipe de Dados | Backlog Secao 1 |
-| Colunas derivadas: TEM_ACESSIBILIDADE, EXCLUSAO_ATIVA, EXCLUSAO_PCD | Equipe de Dados | Backlog Secao 1 |
-| Tecnicas: Analise descritiva ponderada + Regressao Logistica + Arvore de Decisao | ADS | Backlog Secao 4 (Epico 3) |
-| Limitacoes: Sem dados de percepcao do aluno, sem tipo de deficiencia, sem teste e-MAG | Gabriel | Backlog Secao 6 (Alertas) |
+| ⚠️ Natureza dos dados: TABELAS DE INDICADORES AGREGADOS (nao microdados) | Gabriel | Backlog Secao 0 |
+| Estrutura: 69 abas, ~29 segmentos por aba, percentuais ja ponderados | Equipe de Dados | Backlog Secao 0.2 |
+| Tecnicas: Analise descritiva comparativa + leitura paralela de indicadores | Gabriel | Backlog Secao 0.3 |
+| O que NAO podemos fazer: cruzamento entre abas, ML, variaveis derivadas | Gabriel | Backlog Secao 7 |
+| Limitacoes: Sem percepcao do aluno, sem tipo de deficiencia, sem teste e-MAG | Gabriel | Backlog Secao 7 |
 
-**Impacto narrativo:** Credibilidade. O leitor confia no metodo e sabe dos limites.
+**Impacto narrativo:** Credibilidade. O leitor confia no metodo e entende seus limites.
 
 ---
 
 ### CAPITULO 4 — RESULTADOS
 
-Aqui esta o coracao da historia. A ordem dos resultados segue um FUNIL de impacto crescente:
+Aqui esta o coracao da historia. A ordem segue impacto crescente:
 
-#### 4.1 — O Panorama: "As escolas se digitalizaram" (Setup)
-**Pergunta:** As escolas brasileiras usam plataformas digitais? Em que proporcao?
+#### 4.1 — O Retrato Nacional: "O Brasil digitalizou, mas nao incluiu" (Setup)
+**Pergunta:** Qual o nivel de digitalizacao vs. acessibilidade nas escolas brasileiras?
 
-| Grafico/Tabela | User Story | Responsavel | Arquivo |
+| Grafico/Tabela | Pergunta | Card | Arquivo |
 |---|---|---|---|
-| Barras: % com plataformas vs. % com acessibilidade | US-1.1 | Dados | grafico_US1_1.png |
+| Barras: G4A 73,8% vs D2 (4 recursos: 19,6% a 34%) | P1 | Card 5 | graficos/US1_1_panorama.png |
+| D1A: 81,4% das escolas tem alunos PcD | P3 | Card 7 | graficos/US1_3_D1A_pcd.png |
+| Nota sobre "Nao se aplica" (12,8% nacional, 35,2% rural) | P11 | Card 16 | graficos/US1_5_nsa.png |
 
-**Transicao narrativa:** "Sim, as escolas digitalizaram. MAS..."
+**Transicao narrativa:** "73,8% digitalizaram, mas o recurso assistivo mais comum (materiais) atinge apenas 34%. E 81% das escolas TEM alunos com deficiencia. Onde estao as maiores desigualdades?"
 
 ---
 
-#### 4.2 — A Revelacao: "A Ilusao da Digitalizacao" (Ponto de virada)
-**Pergunta:** Dentre essas escolas digitalizadas, quantas esqueceram da acessibilidade?
+#### 4.2 — O Heatmap da Desigualdade: "Quem tem e quem nao tem" (Revelacao)
+**Pergunta:** A oferta de acessibilidade e uniforme pelo pais? Ou ha abismos?
 
-| Grafico/Tabela | User Story | Responsavel | Arquivo |
+| Grafico/Tabela | Pergunta | Card | Arquivo |
 |---|---|---|---|
-| Donut: % SEM acessibilidade entre as que usam plataformas | US-1.2 | Dados | grafico_US1_2_KPI.png |
-| Barras horizontais: taxa de cada recurso assistivo | US-1.3 | Dados | grafico_US1_3.png |
+| **Heatmap D2 completo** (29 segmentos × 4 recursos) | P2 | Card 6 | graficos/US1_2_heatmap_D2.png |
+| Barras por REGIAO (5 regioes × 4 recursos) | P4 | Card 8 | graficos/US2_2_regioes.png |
+| Barras Urbana vs Rural (gaps de 2,6x a 4,1x) | P5 | Card 9 | graficos/US2_3_urbano_rural.png |
+| Barras por PORTE (gap de 83x em aulas assistivas) | P8 | Card 13 | graficos/US2_5_porte.png |
 
-**Transicao narrativa:** "E a situacao e ainda mais grave quando olhamos escolas que TEM alunos com deficiencia..."
+**Transicao narrativa:** "Centro-Oeste lidera TODOS os recursos. Norte/Nordeste sao os excluidos. Escolas rurais tem 4x menos. Escolas pequenas tem 83x menos. Mas existe uma barreira AINDA mais basica..."
 
 ---
 
-#### 4.3 — O Dado mais Critico: "Exclusao com PcD presente" (Climax)
-**Pergunta:** Entre escolas que TEM alunos PcD E usam plataformas, quantas NAO possuem NENHUM recurso?
+#### 4.3 — A Barreira Previa: "Sem infraestrutura, sem inclusao" (Contexto estrutural)
+**Pergunta:** A infraestrutura basica (Internet+Computador) e pre-condicao para acessibilidade?
 
-| Grafico/Tabela | User Story | Responsavel | Arquivo |
+| Grafico/Tabela | Pergunta | Card | Arquivo |
 |---|---|---|---|
-| Percentual-chave (destaque visual no texto e no slide) | US-1.5 | Dados | Numero no texto |
+| Barras: Com infra vs Sem infra (gap de 33x em aulas) | P9 | Card 14 | graficos/US2_7_infra_precondicao.png |
+| Escadaria: A1→B1→G4A→D2 (indicadores paralelos) | P10 | Card 15 | graficos/US4_1_escadaria.png |
 
-**Confronto legal:** Secretariado vincula com Art. 28, incisos V e XIV da LBI + Portaria MEC 3.284/2003
+**Confronto legal:** Art. 63 LBI + Decreto 5.296/2004
 
-**Transicao narrativa:** "Esse problema e uniforme pelo Brasil? Ou ha regioes e tipos de escola mais afetados?"
+**Transicao narrativa:** "E quando a escola TEM infraestrutura e TEM Sala de Recursos, os alunos realmente acessam?"
 
 ---
 
-#### 4.4 — As Desigualdades: "O Abismo Administrativo e Geografico" (Aprofundamento)
-**Pergunta:** Onde a exclusao e pior? Publico vs. privado? Urbano vs. rural? Centro-Oeste vs. pais?
+#### 4.4 — O Funil: "A Sala de Recursos que evapora" (Climax)
+**Pergunta:** Do total de escolas com Internet, quantas tem Sala de Recursos? Quantas com Internet na sala? Quantas onde o aluno realmente acessa?
 
-| Grafico/Tabela | User Story | Responsavel | Arquivo |
+| Grafico/Tabela | Pergunta | Card | Arquivo |
 |---|---|---|---|
-| Barras por dependencia (Federal/Estadual/Municipal/Particular) | US-2.1 | Dados | grafico_US2_1.png |
-| Barras por regiao com destaque Centro-Oeste | US-2.2 | Dados | grafico_US2_2.png |
-| Comparativo Urbana vs. Rural | US-2.4 | Dados | grafico_US2_4.png |
-| Tabela dupla segmentacao Regiao x Dependencia | US-2.3 | Dados | tabela_US2_3.png |
-| Comparativo Capital vs. Interior | US-2.5 | Dados | tabela_US2_5.png |
-| Barras por Porte da escola | US-2.6 | Dados | grafico_US2_6.png |
+| **Funnel chart: D3B 43,5% → D4 41,2% → D5 35,1%** | P6 | Card 10 | graficos/US3_1_funil_sala.png |
 
-**Transicao narrativa:** "Mas antes de ter acessibilidade, a escola precisa ter infraestrutura. Quanta infraestrutura existe de fato?"
+**Confronto legal:** Art. 67 LBI — acessibilidade em comunicacoes
 
----
-
-#### 4.5 — A Barreira Previa: "Infraestrutura como Pre-condicao" (Contexto estrutural)
-**Pergunta:** Quantas escolas sequer tem Internet + computador + plataforma ANTES de falar em acessibilidade?
-
-| Grafico/Tabela | User Story | Responsavel | Arquivo |
-|---|---|---|---|
-| Funil de 5 estagios (Internet->PC->Plataforma->Acessibilidade->Sala AEE) | US-4.1 | Dados | grafico_US4_1_funil_completo.png |
-| Funil da Sala de Recursos (Tem->Internet->Aluno acessa) | US-2.7 | Dados | grafico_US2_7_funil.png |
-| Velocidade de Internet vs. Acessibilidade | US-4.2 | Dados | grafico_US4_2.png |
-| Formacao do Gestor vs. Acessibilidade | US-4.3 | Dados | grafico_US4_3.png |
-
-**Confronto legal:** Art. 63 LBI + Decreto 5.296/2004 + Art. 67 LBI
-
-**Transicao narrativa:** "Com tantas variaveis influenciando, e possivel PREVER quais escolas serao excluidas?"
-
----
-
-#### 4.6 — A Previsao: "Previsibilidade de Exclusao" (Modelagem)
-**Pergunta:** Quais caracteristicas preveem a ausencia de acessibilidade? E possivel tracar um perfil?
-
-| Grafico/Tabela | User Story | Responsavel | Arquivo |
-|---|---|---|---|
-| Tabela de Odds Ratio + Grafico de importancia | US-3.1 | ADS | grafico_US3_1_odds_ratio.png |
-| Arvore de Decisao visual (max_depth=4) | US-3.3 | ADS | grafico_US3_3_arvore.png |
-| Tabela: Perfil da escola excluida vs. incluida | US-3.2 | ADS + Dados | Tabela no texto |
-
-**Impacto narrativo:** "Se sabemos QUAIS escolas estao em risco, podemos agir ANTES."
+**Impacto narrativo:** "Quase 20% das escolas que TEM Sala de Recursos 'perdem' o aluno entre ter a sala e o aluno acessar a Internet nela."
 
 ---
 
@@ -508,12 +434,12 @@ Aqui esta o coracao da historia. A ordem dos resultados segue um FUNIL de impact
 
 | Conteudo | Responsavel | Fonte |
 |---|---|---|
-| Tabela Dado->Argumento Juridico (6+ linhas) | Secretariado | Card 17 |
-| Confronto sistematico: cada resultado vs. artigo de lei | Secretariado | Fichamentos + graficos |
-| Comparacao com estudos anteriores (se houver) | Secretariado | Pesquisa bibliografica |
-| Analise critica: correlacao vs. causalidade (Alerta 4 do backlog) | Gabriel | Backlog Secao 6 |
+| Tabela Dado→Argumento Juridico (6+ linhas com numeros reais) | Gabriel | Card 4 + Graficos |
+| Confronto sistematico: cada resultado vs. artigo de lei | Gabriel | Legislacao + graficos |
+| Hipotese REVISTA: Centro-Oeste lidera (contra expectativa) | Gabriel | P4 (US-2.2) |
+| Nota de transparencia: dados agregados, sem cruzamento, sem causalidade | Gabriel | Backlog Secao 7 |
 
-**Impacto narrativo:** Aqui o numero vira ARGUMENTO. O leitor ve que a exclusao nao e acidente — e falha sistemica.
+**Impacto narrativo:** Aqui o numero vira ARGUMENTO.
 
 ---
 
@@ -522,88 +448,85 @@ Aqui esta o coracao da historia. A ordem dos resultados segue um FUNIL de impact
 
 | Conteudo | Responsavel | Fonte |
 |---|---|---|
-| Resumo dos principais achados (3-5 pontos) | Secretariado | Resultados |
-| Recomendacoes de politica publica: (1) Formacao de gestores em TIC inclusiva, (2) Investimento em infraestrutura basica antes de digitalizar, (3) Auditoria de acessibilidade em plataformas adotadas, (4) Regulamentacao do uso de plataformas educacionais com criterios e-MAG | Secretariado + Gabriel | Resultados + Legislacao |
-| Sugestoes para pesquisas futuras (o que esta base NAO responde) | Gabriel | Backlog Secao 6 (Alerta 5) |
+| Resumo dos 5 principais achados | Gabriel | Resultados |
+| Recomendacao 1: Investimento em infraestrutura ANTES de digitalizar | Gabriel | P9 + P10 |
+| Recomendacao 2: Politicas focalizadas em escolas rurais e de pequeno porte | Gabriel | P5 + P8 |
+| Recomendacao 3: Auditoria de acessibilidade na plataforma Google (59,4%) | Gabriel | P12 |
+| Recomendacao 4: Internet real na Sala de Recursos (funil D3B→D5) | Gabriel | P6 |
+| Sugestoes para pesquisas futuras (o que ESTES dados NAO respondem) | Gabriel | Backlog Secao 7 |
 
-**Impacto narrativo:** O leitor sai com acoes concretas. O projeto entrega VALOR.
+**Impacto narrativo:** O leitor sai com acoes concretas.
 
 ---
 
 ## Resumo Visual da Narrativa (para os slides)
 
 ```
-SLIDE 1:  "O Brasil digitalizou suas escolas" .............. (Contexto)
-SLIDE 2:  "Mas a acessibilidade ficou para tras" .......... (US-1.1)
-SLIDE 3:  "X% das escolas com plataforma NAO tem recurso".. (US-1.2 KPI)
-SLIDE 4:  "Ate com alunos PcD presentes, Y% sem recurso".. (US-1.5 CLIMAX)
-SLIDE 5:  "A escola publica sofre mais" ................... (US-2.1)
-SLIDE 6:  "O Centro-Oeste no mapa da exclusao" ............ (US-2.2)
-SLIDE 7:  "Rural vs. Urbano: o abismo" .................... (US-2.4)
-SLIDE 8:  "O funil que afunila: quem sobrevive?" .......... (US-4.1 FUNIL)
-SLIDE 9:  "Sem Internet nao ha plataforma ativa" .......... (US-2.7 + US-4.2)
-SLIDE 10: "Gestor capacitado = escola mais acessivel" ..... (US-4.3)
-SLIDE 11: "O modelo previu: perfil da escola excluida" .... (US-3.1 + US-3.3)
-SLIDE 12: "O que a lei diz vs. o que os dados mostram" .... (Discussao)
-SLIDE 13: "Recomendacoes: 4 acoes concretas" .............. (Conclusao)
-SLIDE 14: "Obrigado — Perguntas?" ......................... (Encerramento)
+SLIDE 1:  "O Brasil digitalizou suas escolas" .................. (Contexto)
+SLIDE 2:  "73,8% usam plataformas — mas so 12% tem aulas
+           de informatica assistiva" ........................... (P1 — Panorama)
+SLIDE 3:  "81,4% das escolas tem alunos com deficiencia" ....... (P3 — D1A)
+SLIDE 4:  "O Mapa da Desigualdade" (heatmap D2 completo) ...... (P2 — Revelacao)
+SLIDE 5:  "Centro-Oeste lidera TUDO. Norte/Nordeste excluidos". (P4 — Regioes)
+SLIDE 6:  "Rural vs Urbano: gap de ate 4,1x" .................. (P5 — Abismo)
+SLIDE 7:  "Porte ate 50 alunos: 0,3% tem aulas assistivas
+           vs 25% nas escolas 1000+" ........................... (P8 — Gap 83x)
+SLIDE 8:  "Sem Internet+Computador = zero acessibilidade" ..... (P9 — Pre-condicao)
+SLIDE 9:  "A Escadaria da Exclusao: de 95,9% a 12%" .......... (P10 — Paralelo)
+SLIDE 10: "O Funil: 43,5% → 41,2% → 35,1%" .................. (P6 — Sala Recursos)
+SLIDE 11: "O que a lei diz vs o que os dados mostram" ......... (Discussao)
+SLIDE 12: "4 Recomendacoes de Politica Publica" ............... (Conclusao)
+SLIDE 13: "Obrigado — Perguntas?" ............................. (Encerramento)
 ```
 
 ---
 
-## Mapa Completo: Card Trello -> Capitulo Final -> User Story
+## Mapa Completo: Card Trello → Capitulo Final → Pergunta
 
-| Card Trello | Capitulo | Secao | User Story | Prioridade |
+| Card Trello | Capitulo | Secao | Pergunta | Prioridade |
 |---|---|---|---|---|
-| Card 3-6 | Cap 2 (Referencial) | Legislacao | — | MUST |
-| Card 1-2 | Cap 3 (Metodologia) | Base e tratamento | — | MUST |
-| Card 8 | Cap 4.1 | Panorama | US-1.1 | MUST |
-| Card 9 | Cap 4.2 | Ilusao | US-1.2 | MUST |
-| Card 11 | Cap 4.2 | Ilusao | US-1.3 | SHOULD |
-| Card 10 | Cap 4.3 | Climax | US-1.5 | MUST |
-| Card 12 | Cap 4.4 | Desigualdades | US-2.1 | MUST |
-| Card 13 | Cap 4.4 | Desigualdades | US-2.2 | MUST |
-| Card 14 | Cap 4.4 | Desigualdades | US-2.4 | SHOULD |
-| Card 25 | Cap 4.4 | Desigualdades | US-2.3 | COULD |
-| Card 26 | Cap 4.4 | Desigualdades | US-2.5 | COULD |
-| Card 27 | Cap 4.4 | Desigualdades | US-2.6 | COULD |
-| Card 16 | Cap 4.5 | Infraestrutura | US-4.1 | MUST |
-| Card 15 | Cap 4.5 | Infraestrutura | US-2.7 | SHOULD |
-| Card 23 | Cap 4.5 | Infraestrutura | US-4.2 | COULD |
-| Card 22 | Cap 4.5 | Infraestrutura | US-4.3 | SHOULD |
-| Card 19 | Cap 4.6 | Previsao | US-3.1 | SHOULD |
-| Card 20 | Cap 4.6 | Previsao | US-3.3 | COULD |
-| Card 21 | Cap 4.6 | Previsao | US-3.2 | COULD |
-| Card 17 | Cap 5 | Discussao | — | MUST |
-| Card 28-30 | Cap 1-6 | Todos | — | MUST |
-| Card 29 | Apresentacao | Dashboard | Todos | MUST |
+| Card 4 | Cap 2 (Referencial) | Legislacao | — | MUST |
+| Card 1-2 | Cap 3 (Metodologia) | Base e extracao | — | MUST |
+| Card 5 | Cap 4.1 | Retrato Nacional | P1 | MUST |
+| Card 7 | Cap 4.1 | Retrato Nacional | P3 | MUST |
+| Card 16 | Cap 4.1 | Retrato Nacional | P11 | SHOULD |
+| Card 6 | Cap 4.2 | Heatmap Desigualdade | P2 | MUST |
+| Card 8 | Cap 4.2 | Regioes | P4 | MUST |
+| Card 9 | Cap 4.2 | Urbano-Rural | P5 | MUST |
+| Card 13 | Cap 4.2 | Porte | P8 | SHOULD |
+| Card 12 | Cap 4.2 | Dependencia | P7 | SHOULD |
+| Card 14 | Cap 4.3 | Pre-condicao | P9 | SHOULD |
+| Card 15 | Cap 4.3 | Escadaria | P10 | SHOULD |
+| Card 10 | Cap 4.4 | Funil Nacional | P6 | MUST |
+| Card 17 | Cap 4.2 | Plataformas | P12 | COULD |
+| Card 18 | Cap 4.2/4.3 | Contexto | P13-P19 | COULD |
+| Card 21 | Cap 1-6 | Artigo completo | — | MUST |
+| Card 20 | Apresentacao | Dashboard | Todos | MUST |
 
 ---
 
 ## Cronograma Resumido para o Trello
 
 ```
-SEMANA 1 (Sprint 1)          SEMANA 2 (Sprint 2)
-========================      ========================
-DADOS: Download + Limpeza     DADOS: Graficos Epico 1+2
-  Cards 1, 2                    Cards 8-16
-SECRET: Fichamento leis       SECRET: Tabela Dado->Lei
-  Cards 3, 4, 5, 6             Card 17
-ADS: Aguarda df limpo         ADS: Prepara base modelo
-  (sem card ativo)              Card 18
-GABRIEL: Valida limpeza       GABRIEL: Valida graficos
-  Card 7                        Card 33
+SEMANA 1 (Sprint 1)              SEMANA 2 (Sprint 2)
+============================      ============================
+DADOS: Extracao XLSX + CSVs       DADOS: Graficos MUST HAVE
+  Cards 1, 2                        Cards 5, 6, 7, 8, 9, 10
+ADS: Aguarda CSVs / Estuda BI    ADS: Estrutura Power BI
+  (sem card ativo)                  Card 11
+GABRIEL: Valida extracao          GABRIEL: Valida graficos
+  + Pesquisa leis                   Card 24 (GO para sprint 3)
+  Cards 3, 4
 
-SEMANA 3 (Sprint 3)          SEMANA 4 (Sprint 4)
-========================      ========================
-DADOS: Graficos Epico 4       DADOS: Dashboard Power BI
-  Cards 22, 23                  Card 29
-SECRET: Redacao parcial       SECRET: Texto ABNT + Slides
-  Card 28                       Card 30
-ADS: Regressao + Arvore       ADS: Revisao
-  Cards 19, 20, 21              Card 31
-GABRIEL: Valida modelos       GABRIEL: Revisao final
-  Card 33                       Card 31
+SEMANA 3 (Sprint 3)              SEMANA 4 (Sprint 4)
+============================      ============================
+DADOS: Graficos SHOULD+COULD     DADOS: Suporte ao ADS
+  Cards 12-18                       (graficos finais)
+ADS: Power BI avancado            ADS: Dashboard final
+  Card 19                           Card 20
+GABRIEL: Valida analises          GABRIEL: Artigo + Slides
+  + Inicia redacao                  Cards 21, 22
+  Card 24                           Card 23 (revisao com todos)
 ```
 
 ---
@@ -617,4 +540,16 @@ GABRIEL: Valida modelos       GABRIEL: Revisao final
 | Tarefa travada | Adicionar etiqueta VERMELHA "BLOQUEADO" + comentar motivo |
 | Tarefa concluida | Mover para "Concluido" + marcar checklist |
 | Entrega validada pelo Gabriel | Adicionar etiqueta DOURADA "APROVADO" |
-| Quarta-feira semanal | Secretariado atualiza planilha + verifica status de todos os cards |
+| Quarta-feira semanal | Gabriel confere status de todos os cards |
+
+---
+
+## ⚠️ LEMBRETES IMPORTANTES PARA O TRELLO
+
+1. **NAO EXISTEM CARDS DE ML/REGRESSAO/ARVORE** — sem microdados, nao e possivel
+2. **NAO EXISTEM CARDS DE LIMPEZA DE CSV** — os dados ja vem prontos nas tabelas de indicadores
+3. **NAO EXISTEM variaveis derivadas** — impossivel com dados agregados
+4. **O ADS neste projeto faz POWER BI**, nao modelagem estatistica
+5. **Todo grafico que compara indicadores de abas diferentes DEVE ter nota metodologica** dizendo que e "leitura paralela, nao cruzamento estatistico"
+6. **O UNICO funil legitimo e o da Sala de Recursos** (D3B→D4→D5)
+7. **Gabriel absorveu a escrita do artigo, legislacao e slides** — nao ha equipe de Secretariado
